@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
+    <Login/>
     <CheckIn />
     <Footer />
     <NewPwd/>
@@ -8,12 +9,14 @@
 </template>
 
 <script>
+  import Login from './components/Login.vue';
   import CheckIn from "./components/CheckIn.vue"
   import Footer from "./components/footer.vue"
   import NewPwd from "./components/NewPwd.vue"
   export default {
     name: 'App',
     components: {
+      Login,
       CheckIn,
       Footer,
       NewPwd
