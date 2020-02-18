@@ -2,16 +2,19 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
  <CheckIn />
+ <Footer />
 
   </div>
 </template>
 
 <script>
 import CheckIn from "./components/CheckIn.vue"
+import Footer from "./components/footer.vue"
 export default {
   name: 'App',
   components: {
-    CheckIn
+    CheckIn,
+    Footer
   }
 }
 </script>
