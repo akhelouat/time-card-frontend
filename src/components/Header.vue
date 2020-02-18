@@ -2,9 +2,9 @@
     <header class="menu">
         <nav>
             <div class="logo-container">
-                <a href="/">
-                    <img src="https://learn.openhackademy.com/images/lg-hd-2.png" alt="This is the OpenHackademy logo in the navigation menu">
-                </a>
+                <router-link :to="{name: 'login'}">
+                    <img src="../assets/logo_oha.png" alt="This is the OpenHackademy logo in the navigation menu">
+                </router-link>
             </div>
             <router-link :to="{name: 'login'}">Home</router-link>
             <router-link :to="{name: 'check'}">check</router-link>
