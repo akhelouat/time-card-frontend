@@ -9,10 +9,11 @@
 
 <template>
     <div>
-        <form action='abdelfaitdelapdo' method="post">
+        <form action='/present'>
             <h3>We are : <span> {{ createdAtDisplay }}</span></h3>
-            <button type="submit">benjam prezent</button>
-            {{ checkTime }}
+            <p>{{ checkTime }}</p>
+            <button type="submit" :disabled="validated == 1">benjam prezent</button>
+            
         </form>
     </div>
 </template>
@@ -23,21 +24,26 @@
         computed: {
             createdAtDisplay() {
                 return moment().format('YYYY-MM-DD h:mm A');
-            }
-        },
-        methods: {
-            checkTime() {
+            },
+                checkTime() {
                 var format = 'hh:mm:ss'
-                var time = moment('09:31:00', format),
-                    beforeTime = moment('09:30:00', format),
+                var time = moment('17:29:00', format),
+                    tooEarlyTime = moment('08:00:00', format), 
+                    tooLateTime = moment('09:30:00', format),
                     afterTime = moment('17:00:00', format);
-                if (time.isBetween(beforeTime, afterTime)) {
-                    console.log('is between')
-                } else {
-                    console.log('is not between')
+                if (time.isBefore(tooEarlyTime)) {
+                    return 'You cannot sign now, its too early'
+                } else if (time.isBetween(tooEarlyTime, tooLateTime)){
+                       return 'You are at time';
+                } else if (time.isBetween(tooLateTime, afterTime)){
+                       return 'You are late';
+                }
+                else {
+                    return 'You cannot sign now';
                 }
             }
-        }
+        },
+
     };
 </script>
 
