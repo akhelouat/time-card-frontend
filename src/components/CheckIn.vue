@@ -2,7 +2,7 @@
  * @ Author: Rahil Felix
  * @ Create Time: 2020-02-18 12:02:04
  * @ Modified by: Rahil Felix
- * @ Modified time: 2020-02-18 13:26:53
+ * @ Modified time: 2020-02-18 16:17:43
  * @ Description:
  -->
  
@@ -12,7 +12,8 @@
         <form action='/present'>
             <h3>We are : <span> {{ createdAtDisplay }}</span></h3>
             <p>{{ checkTime }}</p>
-            <button type="submit" :disabled="validated == 1">benjam prezent</button>
+            <button type="submit" :disabled="validated == 1">benjam?</button>
+            
             
         </form>
     </div>
@@ -21,6 +22,7 @@
 <script>
     const moment = require('moment')
     export default {
+
         computed: {
             createdAtDisplay() {
                 return moment().format('YYYY-MM-DD h:mm A');
@@ -44,6 +46,7 @@
             }
         },
 
+     
     };
 </script>
 

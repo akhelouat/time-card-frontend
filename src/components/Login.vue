@@ -1,6 +1,7 @@
 <template>
     <div class="container">
         <div class="form-control">
+            <div v-show="error">{{ error }}</div>
             <input type="text" name="username" placeholder="username" v-model="user.name">
             <input type="text" name="password" placeholder="password" v-model="user.password">
             <button href="#" @click="isEmpty(user)">Log in</button>
@@ -14,14 +15,17 @@
             return {
                 user: {
                     name: "",
-                    password: ""
-                }
+                    password: "",
+                },
+                error: ""
             }
         },
         methods: {
             isEmpty(usr) {
-                if ((usr.name || usr.password ) === "")
-                    return "Error, empty values"
+                if((usr.name.length && usr.password.length) === 0 || (usr.name.length || usr.password.length) === 0)
+                    return this.error = "Error : empty values";
+                else
+                    return this.error = "Ok!";
             }
         }
     }
