@@ -1,15 +1,17 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
- 
+ <CheckIn />
+
   </div>
 </template>
 
 <script>
-
+import CheckIn from "./components/CheckIn.vue"
 export default {
   name: 'App',
   components: {
+    CheckIn
   }
 }
 </script>
