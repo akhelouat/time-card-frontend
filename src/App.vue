@@ -1,21 +1,19 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <Login/>
-    <CheckIn />
-    <Footer />
+   <nav>
+      <router-link to="/">Home</router-link>
+      <router-link to="/check">check</router-link>
+    </nav>
+    <router-view/>
+    <Footer/>
   </div>
 </template>
 
 <script>
-  import Login from './components/Login.vue';
-  import CheckIn from "./components/CheckIn.vue"
   import Footer from "./components/footer.vue"
   export default {
     name: 'App',
     components: {
-      Login,
-      CheckIn,
       Footer
     }
   }
