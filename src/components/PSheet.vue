@@ -2,23 +2,17 @@
  * @ Author: Rahil Felix
  * @ Create Time: 2020-02-18 12:02:04
  * @ Modified by: Rahil Felix
- * @ Modified time: 2020-02-18 16:17:43
+ * @ Modified time: 2020-02-18 16:35:36
  * @ Description:
  -->
 
 <template>
     <div>
-        <form action='/present'>
-            <button type="submit">benjam?</button>
-        </form>
     </div>
 </template>
 
 <script>
     export default {
-        data: () => {
-            return {};
-        },
     };
 </script>
 
