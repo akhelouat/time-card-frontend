@@ -1,6 +1,6 @@
 <template>
 <div id="footer">
-    {{ test }}
+    <img src="../assets/logo_oha.png" alt="logo">
 </div>    
 </template>
 <script>
