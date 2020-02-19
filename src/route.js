@@ -5,8 +5,7 @@ import Login from './components/Login.vue'
 import Pre from './components/Present.vue'
 import NewPass from './components/NewPass.vue'
 import PSheet from './components/PSheet.vue'
-
-
+import AdminHomePage from './components/AdminHomePage'
 
 Vue.use(Router)
 
@@ -31,10 +30,16 @@ export default new Router({
             path: '/newpass',
             name: 'newpass',
             component: NewPass
-        }, {
+        },
+        {
             path: '/PSheet',
             name: 'psheet',
             component: PSheet
+        },
+        {
+            path: '/admin/home',
+            name: 'adminhome',
+            component: AdminHomePage
         },
         {
             path: '*',
