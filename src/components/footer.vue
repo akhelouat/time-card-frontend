@@ -1,7 +1,7 @@
 <template>
 <div id="footer">
     <img src="../assets/logo_oha.png" alt="logo">
-  
+    <div>  {{ users[1].name }} </div>
 </div>    
 </template>
 <script>
