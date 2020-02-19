@@ -1,14 +1,25 @@
 <template>
 <div id="footer">
     <img src="../assets/logo_oha.png" alt="logo">
+  
 </div>    
 </template>
 <script>
+import { data } from '../services/api/data' 
 export default {
     data: () => {
         return {
-          test: 'openhackademy'
+          test: 'openhackademy',
+          users: null,
+          error: null
         };
+    },
+    created () {
+      data().then(users => this.users = users)
+        .catch(error => {
+          console.log(error);
+          this.error = error
+        });
     }
     
 }
