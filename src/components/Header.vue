@@ -3,7 +3,7 @@
         <nav>
             <div class="logo-container">
                 <router-link :to="{name: 'login'}">
-                    <img src="../assets/logo_oha.png" alt="This is the OpenHackademy logo in the navigation menu">
+                    <img src="../assets/logo.png" alt="This is the OpenHackademy logo in the navigation menu">
                 </router-link>
             </div>
             <div class="links" v-if="user.role === false">

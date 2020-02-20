@@ -20,6 +20,7 @@ export default new Router({
             name: 'login',
             component: Login
         },
+        //student path
         {
             path: '/check',
             name: 'check',
@@ -40,6 +41,9 @@ export default new Router({
             name: 'psheet',
             component: PSheet
         },
+        //admin path
+
+        //redirect path
         {
             path: '/admin/home',
             name: 'adminhome',
