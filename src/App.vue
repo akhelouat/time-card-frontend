@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-   <nav>
+    <nav>
       <router-link :to="{name: 'login'}">Home</router-link>
       <router-link :to="{name: 'check'}">check</router-link>
     </nav>
