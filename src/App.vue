@@ -1,19 +1,18 @@
 <template>
   <div id="app">
-   <nav>
-      <router-link :to="{name: 'login'}">Home</router-link>
-      <router-link :to="{name: 'check'}">check</router-link>
-    </nav>
+    <Header/>
     <router-view/>
     <Footer/>
   </div>
 </template>
 
 <script>
-  import Footer from "./components/footer.vue"
+  import Header from './components/Header.vue';
+  import Footer from './components/Footer.vue';
   export default {
     name: 'App',
     components: {
+      Header,
       Footer
     }
   }
