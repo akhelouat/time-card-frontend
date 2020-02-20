@@ -1,14 +1,29 @@
 <template>
 <div id="footer">
+<<<<<<< HEAD:src/components/footer.vue
+    <img src="../assets/logo_oha.png" alt="logo">
+    <div>  {{ users[1].name }} </div>
+=======
     <img src="../assets/logo.png" alt="logo">
+>>>>>>> 3f6055aba99807cf99418f69a7eb2edf2bc7fca8:src/components/Footer.vue
 </div>    
 </template>
 <script>
+import { data } from '../services/api/data' 
 export default {
     data: () => {
         return {
-          test: 'openhackademy'
+          test: 'openhackademy',
+          users: null,
+          error: null
         };
+    },
+    created () {
+      data().then(users => this.users = users)
+        .catch(error => {
+          console.log(error);
+          this.error = error
+        });
     }
     
 }
