@@ -8,10 +8,21 @@ export function addPromo() {
     .then(response => response.data);
 }
 
-export function addMember() {
+export function addMember(nom, prenom, email, adress, cp, phone, idPole) {
     return axios.request({
         method: 'post',
-        url: 'api/addMember'
+        url: '/api/addMember',
+        data: {
+            nom,
+            prenom,
+            email,
+            adress,
+            cp,
+            phone,
+            idPole
+
+          }
+      
     })
     .then(response => response.data)
 }
