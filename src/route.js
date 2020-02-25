@@ -10,6 +10,7 @@ import CreatePromoPage from './components/CreatePromoPage'
 import ManagePromoPage from './components/ManagePromoPage'
 import CreateUserPage from './components/CreateUserPage'
 import ManageUserPage from './components/ManageUserPage'
+import StatPromo from './components/StatPromo'
 
 Vue.use(Router)
 
@@ -68,6 +69,10 @@ export default new Router({
             path: '/admin/manage/user',
             name: 'manageuser',
             component: ManageUserPage
+        }, {
+            path: '/admin/stat/promo',
+            name: 'statpromo',
+            component: StatPromo
         },
         {
             path: '*',
