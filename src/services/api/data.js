@@ -8,6 +8,14 @@ export function addPromo() {
     .then(response => response.data);
 }
 
+export function addMember() {
+    return axios.request({
+        method: 'post',
+        url: 'api/addMember'
+    })
+    .then(response => response.data)
+}
+
 export function data() {
     return axios
 .get('/api/getData')
