@@ -13,10 +13,7 @@
             </div>
             <div class="links" v-else>
                 <router-link :to="{name: 'adminhome'}">Home</router-link>
-                <router-link :to="{name: 'createpromo'}">Create Promo</router-link>
-                <router-link :to="{name: 'managepromo'}">Manage Promo</router-link>
-                <router-link :to="{name: 'createuser'}">Create User</router-link>
-                <router-link :to="{name: 'manageuser'}">Manage User</router-link>
+                <router-link :to="{name: 'manager'}">Manager</router-link>
                 <router-link :to="{name: 'newpass'}">Change Password</router-link>
                 <router-link :to="{name: 'login'}">Logout</router-link>
             </div>

@@ -6,11 +6,8 @@ import Pre from './components/Present.vue'
 import NewPass from './components/NewPass.vue'
 import PSheet from './components/PSheet.vue'
 import AdminHomePage from './components/AdminHomePage'
-import CreatePromoPage from './components/CreatePromoPage'
-import ManagePromoPage from './components/ManagePromoPage'
-import CreateUserPage from './components/CreateUserPage'
-import ManageUserPage from './components/ManageUserPage'
 import StatPromo from './components/StatPromo'
+import Manager from './components/Manager'
 
 Vue.use(Router)
 
@@ -51,28 +48,14 @@ export default new Router({
             component: AdminHomePage
         },
         {
-            path: '/admin/create/promo',
-            name: 'createpromo',
-            component: CreatePromoPage
-        },
-        {
-            path: '/admin/manage/promo',
-            name: 'managepromo',
-            component: ManagePromoPage
-        },
-        {
-            path: '/admin/create/user',
-            name: 'createuser',
-            component: CreateUserPage
-        },
-        {
-            path: '/admin/manage/user',
-            name: 'manageuser',
-            component: ManageUserPage
-        }, {
             path: '/admin/stat/promo',
             name: 'statpromo',
             component: StatPromo
+        },
+        {
+            path: '/admin/manage',
+            name: 'manager',
+            component: Manager
         },
         {
             path: '*',
