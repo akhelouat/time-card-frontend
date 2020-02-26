@@ -13,7 +13,7 @@
 </template>
 
 <script>
-    import {
+    /*import {
         getMember
     } from "../services/api/getUser";
     const Moment = require('moment');
@@ -45,7 +45,7 @@
     const range = moment.range('2019-10-01', '2020-03-01');
     for (let month of range.by('month')) {
         alert(month.format('YYYY-MM-DD'));
-    }
+    }*/
 </script>
 
 <style>

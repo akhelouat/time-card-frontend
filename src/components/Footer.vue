@@ -5,7 +5,6 @@
 </div>    
 </template>
 <script>
-import { data } from '../services/api/data' 
 export default {
     data: () => {
         return {
@@ -13,15 +12,8 @@ export default {
           users: null,
           error: null
         };
-    },
-    created () {
-      data().then(users => this.users = users)
-        .catch(error => {
-          console.log(error);
-          this.error = error
-        });
     }
-    
+
 }
 </script>
 <style scoped>
