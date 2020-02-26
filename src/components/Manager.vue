@@ -7,6 +7,9 @@
 </template>
 
 <script>
+
+
+    import { getPromo } from '../services/api/promo';
     import AsideManager from './ManagerComponents/AsideManager';
     import UserUpdater from './ManagerComponents/UserUpdater';
     import UserCreator from './ManagerComponents/UserCreator';
@@ -93,6 +96,17 @@
             }
         },
         methods: {
+               loadPromo() {
+      getPromo()
+      .then(promo => {
+        this.loading = false;
+        this.promos = promo;
+      })
+      .catch(error => {
+        this.loading = false;
+        this.error = error;
+      });
+    },
             getSelectedUser(UserObject)
             {
                 this.selectedUser = UserObject;
@@ -101,6 +115,13 @@
             {
                 this.newUser = boolean;
             }
-        }
+        },
+            created() {
+    this.loadPromo();
+    },
     }
+      
+    
+
+
 </script>
