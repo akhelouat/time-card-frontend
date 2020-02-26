@@ -2,7 +2,7 @@
  * @ Author: Rahil Felix
  * @ Create Time: 2020-02-18 14:28:06
  * @ Modified by: Rahil Felix
- * @ Modified time: 2020-02-19 10:40:17
+ * @ Modified time: 2020-02-20 16:09:14
  * @ Description:
  -->
 
@@ -48,7 +48,7 @@
                 this.errors = [];
                 if ((this.new1 != this.new2) && (this.new1 && this.new2)) {
                     this.errors.push('new passwd must match.');
-                }
+                }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
                 if ((this.old != this.user.password) && (this.old)) {
                     this.errors.push('old pwd must match.');
                 }

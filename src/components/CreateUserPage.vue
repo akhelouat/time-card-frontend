@@ -5,33 +5,34 @@
             <div class="error-message" v-show="error">{{ error }}</div>
             <!-- User names -->
             <div class="test">
-                <input type="text" name="fist-name" placeholder="First Name" v-model="user.firstName" />
-                <input type="text" name="last-name" placeholder="Last Name" v-model="user.lastName" />
+                <input type="text" name="fist-name" placeholder="First Name" v-model="user.firstname" />
+                <input type="text" name="last-name" placeholder="Last Name" v-model="user.lastname" />
             </div>
             <!--  User address -->
             <div class="test">
                 <input type="text" name="address" placeholder="Address " v-model="user.address" />
                 <input type="text" name="address-cp" placeholder="CP" v-model="user.addressCP" />
             </div>
-            <input type="text" name="mail" placeholder="Mail" v-model="user.mail" />
+            <input type="text" name="mail" placeholder="Mail" v-model="user.email" />
             <input type="text" name="mobile-number" placeholder="Mobile/Phone" v-model="user.mobileNumber" />
             <input type="text" name="pole-emploi-number" placeholder="Pole Emploi ID" v-model="user.poleEmploiNumber" />
             <input type="text" name="password" placeholder="Password" v-model="user.password" />
             <input type="text" name="password-confirm" placeholder="Confirm Password" v-model="user.passwordConfirm" />
-            <button href="#" @click="isEmpty(user)">Create User</button>
+            <button href="#" @click=" createMember()">Create User</button>
         </div>
     </section>
 </template>
 
 <script>
+import { addMember } from '../services/api/data'
     export default {
         data: () => {
             return {
                 title: "Create User",
                 user: {
-                    firstName: "",
-                    lastName: "",
-                    mail: "",
+                    firstname: "",
+                    lastname: "",
+                    email: "",
                     address: "",
                     addressCP: "",
                     mobileNumber: "",
@@ -58,8 +59,29 @@
                         });
                         this.error = "Success !"
                     }
+                    
+
                 }
+            },
+            createMember () {
+                addMember(this.user.firstname, this.user.lastname, this.user.email, this.user.adress, this.user.adressCP, this.user.mobileNumber, this.user.poleEmploiNumber)
+                    .then(() => {
+                    this.user.firstname = '';
+                    this.user.lastname = '';
+                    this.user.email = '';
+                    this.user.adress = '';
+                    this.user.adressCP = '';
+                    this.user.mobileNumber = '';
+                    this.user.poleEmploiNumber = ''
+     
+                    })
+                    .catch((error) => {
+                    this.error = error;
+                     });
             }
+      
+
+        
         }
     };
 </script>

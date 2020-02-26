@@ -1,5 +1,6 @@
 <template>
 <div id="footer">
+
    <img src="../assets/logo_oha.png" alt="logo">
 </div>    
 </template>
