@@ -34,7 +34,7 @@ export function getMember(email) {
 
 export function updateMember(_id, params, newValue) {
     return axios.request({
-            method: 'update',
+            method: 'put',
             url: '/api/updateMember',
             data: {
                 _id,
@@ -47,7 +47,7 @@ export function updateMember(_id, params, newValue) {
 
 export function deleteMember(_id) {
     return axios.request({
-            method: 'update',
+            method: 'delete',
             url: '/api/deleteMember',
             data: {
                 _id
