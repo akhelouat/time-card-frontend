@@ -10,6 +10,7 @@
 
 
     import { getPromo } from '../services/api/promo';
+    import { getMember } from '../services/api/member';
     import AsideManager from './ManagerComponents/AsideManager';
     import UserUpdater from './ManagerComponents/UserUpdater';
     import UserCreator from './ManagerComponents/UserCreator';
@@ -107,6 +108,17 @@
         this.error = error;
       });
     },
+    loadMember() {
+        getMember()
+         .then(member => {
+        this.loading = false;
+        this.members = member;
+      })
+      .catch(error => {
+        this.loading = false;
+        this.error = error;
+      });
+    },
             getSelectedUser(UserObject)
             {
                 this.selectedUser = UserObject;
@@ -118,6 +130,7 @@
         },
             created() {
     this.loadPromo();
+    this.loadMember();
     },
     }
       
