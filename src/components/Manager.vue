@@ -2,7 +2,7 @@
     <div id="Manager">
         <AsideManager :promos="promos" :users="users" v-on:newUserCreator="getNewUserCreator" v-on:userSelector="getSelectedUser"/>
         <UserUpdater :user="selectedUser" v-on:userCanceled="getSelectedUser" />
-        <UserCreator v-if="newUser" :users="users"/>
+        <UserCreator v-if="newUser" :users="users" :promos="promos"/>
     </div>
 </template>
 
