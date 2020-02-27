@@ -2,32 +2,30 @@
  * @ Author: Rahil Felix
  * @ Create Time: 2020-02-20 09:29:58
  * @ Modified by: Rahil Felix
- * @ Modified time: 2020-02-25 16:52:48
+ * @ Modified time: 2020-02-27 13:48:33
  * @ Description:
  -->
 
 <template>
     <div>
-    <p v-if="errors.length>0">
-                <b>Please correct the following error(s):</b>
-                <ul>
-                    <li v-for="error in errors" :key="error">{{ error }}</li>
-                </ul>
-    </p>
-    <form class="form-control" @submit="checkForm">
-        <h1>{{ title }}:</h1>
-        <input type="text" name="nom" id="nom" placeholder="Promo Name" v-model="nom">
-
-        <div class="control-container">
-            <date-pick v-model="start" :displayFormat="'DD.MM.YYYY'" :format="'DD.MM.YYYY'"></date-pick>
-            <date-pick v-model="end" :displayFormat="'DD.MM.YYYY'" :format="'DD.MM.YYYY'"></date-pick>
-        </div>
-        <span>Between : {{start}} and {{end}}</span>
-        <div class="control-container">
-            <button type="submit">add Promo</button>
-        </div>
-    </form>
-     
+        <p v-if="errors.length>0">
+            <b>Please correct the following error(s):</b>
+            <ul>
+                <li v-for="error in errors" :key="error">{{ error }}</li>
+            </ul>
+        </p>
+        <form class="form-control" @submit="checkForm">
+            <h1>{{ title }}:</h1>
+            <input type="text" name="nom" id="nom" placeholder="Promo Name" v-model="nom">
+            <div class="control-container">
+                <date-pick v-model="start" :displayFormat="'DD.MM.YYYY'" :format="'DD.MM.YYYY'"></date-pick>
+                <date-pick v-model="end" :displayFormat="'DD.MM.YYYY'" :format="'DD.MM.YYYY'"></date-pick>
+            </div>
+            <span>Between : {{start}} and {{end}}</span>
+            <div class="control-container">
+                <button type="submit">add Promo</button>
+            </div>
+        </form>
     </div>
 </template>
 
@@ -39,7 +37,7 @@
         props: ["PromoCreator"],
         data: () => {
             return {
-                title:'new Promo',
+                title: 'new Promo',
                 errors: [],
                 nom: null,
                 start: moment().format('DD.MM.YYYY'),
@@ -70,7 +68,7 @@
 </script>
 
 <style scoped>
- h1 {
+    h1 {
         background-color: #121212;
         color: #fafafa;
         width: 81%;

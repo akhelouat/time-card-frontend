@@ -1,17 +1,18 @@
 const axios = require('axios');
 
-export function addMember(nom, prenom, email, adress, cp, phone, idPole) {
+export function addMember(firstName, lastName, mail, address, addressCP, mobileNumber, poleEmploiNumber, namePromo) {
     return axios.request({
             method: 'post',
             url: '/api/addMember',
             data: {
-                nom,
-                prenom,
-                email,
-                adress,
-                cp,
-                phone,
-                idPole
+                firstName,
+                lastName,
+                mail,
+                address,
+                addressCP,
+                mobileNumber,
+                poleEmploiNumber,
+                namePromo
             }
 
         })
@@ -33,6 +34,28 @@ export function getMember() {
     return axios.request({
             method: 'get',
             url: '/api/getMember'
+        })
+        .then(response => response.data)
+}
+
+export function getOneMember(_id) {
+    return axios.request({
+            method: 'get',
+            url: '/api/getMember',
+            data: {
+                _id,
+            }
+        })
+        .then(response => response.data)
+}
+
+export function getMemberForConnection(username) {
+    return axios.request({
+            method: 'get',
+            url: '/api/getMember',
+            data: {
+                username,
+            }
         })
         .then(response => response.data)
 }
