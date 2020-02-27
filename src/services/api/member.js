@@ -1,17 +1,18 @@
 const axios = require('axios');
 
-export function addMember(nom, prenom, email, adress, cp, phone, idPole) {
+export function addMember(firstName, lastName, mail, address, addressCP, mobileNumber, poleEmploiNumber, namePromo) {
     return axios.request({
             method: 'post',
             url: '/api/addMember',
             data: {
-                nom,
-                prenom,
-                email,
-                adress,
-                cp,
-                phone,
-                idPole
+                firstName,
+                lastName,
+                mail,
+                address,
+                addressCP,
+                mobileNumber,
+                poleEmploiNumber,
+                namePromo
             }
 
         })
