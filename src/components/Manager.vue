@@ -1,8 +1,9 @@
 <template>
     <div id="Manager">
-        <AsideManager :promos="promos" :users="users" v-on:newUserCreator="getNewUserCreator" v-on:userSelector="getSelectedUser"/>
+        <AsideManager :promos="promos" :users="users" v-on:newUserCreator="getNewUserCreator" v-on:newPromoCreator="getNewPromoCreator" v-on:userSelector="getSelectedUser" />
         <UserUpdater :user="selectedUser" v-on:userCanceled="getSelectedUser" />
         <UserCreator v-if="newUser" :users="users" :promos="promos"/>
+        <PromoCreator v-if="newPromo"/>
     </div>
 </template>
 
@@ -14,12 +15,14 @@
     import AsideManager from './ManagerComponents/AsideManager';
     import UserUpdater from './ManagerComponents/UserUpdater';
     import UserCreator from './ManagerComponents/UserCreator';
+    import PromoCreator from './ManagerComponents/PromoCreator';
 
     export default {
         components: {
             AsideManager,
             UserUpdater,
-            UserCreator
+            UserCreator,
+            PromoCreator
         },
         data() {
             return {
@@ -93,7 +96,8 @@
                     }
                 ],
                 selectedUser: "",
-                newUser: false
+                newUser: false,
+                newPromo: false
             }
         },
         methods: {
@@ -126,6 +130,10 @@
             getNewUserCreator(boolean)
             {
                 this.newUser = boolean;
+            },
+            getNewPromoCreator(boolean)
+            {
+                this.newPromo = boolean;
             }
         },
             created() {

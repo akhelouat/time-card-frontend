@@ -9,7 +9,7 @@
       </li>
       <!-- New  Promo -->
       <li>
-        <a href="#">New Promo</a>
+        <a href="#" @click="emitNewPromoCreator()">New Promo</a>
       </li>
       <!-- Links promos -->
       <li v-for="promotion in promos" :key="promotion.name">
@@ -34,11 +34,14 @@
         title: "Manager",
         selectedPromo: "",
         selectedUser: "",
-        booleans: [{
-          selectedUser: false
-        }, {
+        booleans: [
+        {
           newUser: false
-        }]
+        },
+        {
+          newPromo: false
+        }
+        ]
       };
     },
     methods: {
@@ -58,10 +61,16 @@
           this.$emit("userSelector", this.selectedUser); this.selectedUser = "";
       },
       emitNewUserCreator() {
-        if (this.booleans[1].newUser)
-          this.$emit("newUserCreator", (this.booleans[1].newUser = false));
+        if (this.booleans[0].newUser)
+          this.$emit("newUserCreator", (this.booleans[0].newUser = false));
         else
-          this.$emit("newUserCreator", (this.booleans[1].newUser = true));
+          this.$emit("newUserCreator", (this.booleans[0].newUser = true));
+      },
+      emitNewPromoCreator() {
+        if (this.booleans[1].newPromo)
+          this.$emit("newPromoCreator", (this.booleans[1].newPromo = false));
+        else
+          this.$emit("newPromoCreator", (this.booleans[1].newPromo = true));
       }
     }
   };
