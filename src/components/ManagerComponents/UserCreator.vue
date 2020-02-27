@@ -9,7 +9,7 @@
         <!--  User address -->
         <div class="control-container">
             <input type="text" name="address" placeholder="Address" v-model="user.address" />
-            <input type="text" name="address-cp" placeholder="CP address" v-model="user.addressCp" />
+            <input type="text" name="address-cp" placeholder="CP address" v-model="user.addressCP" />
         </div>
         <input type="text" name="mail" placeholder="mail" v-model="user.mail" />
         <input type="text" name="mobile-number" placeholder="mobile" v-model="user.mobileNumber" />
@@ -37,7 +37,7 @@
                     firstName: "",
                     lastName: "",
                     address: "",
-                    addressCp: "",
+                    addressCP: "",
                     mail: "",
                     mobileNumber: "",
                     poleEmploiNumber: "",
