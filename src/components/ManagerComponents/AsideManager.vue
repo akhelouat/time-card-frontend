@@ -26,7 +26,6 @@
 </template>
 
 <script>
-
   export default {
     props: ["promos", "users"],
     data() {
@@ -34,13 +33,12 @@
         title: "Manager",
         selectedPromo: "",
         selectedUser: "",
-        booleans: [
-        {
-          newUser: false
-        },
-        {
-          newPromo: false
-        }
+        booleans: [{
+            newUser: false
+          },
+          {
+            newPromo: false
+          }
         ]
       };
     },
@@ -58,7 +56,8 @@
         if (typeof this.selectedUser === 'string')
           this.$emit("userSelector", this.selectedUser = "");
         else
-          this.$emit("userSelector", this.selectedUser); this.selectedUser = "";
+          this.$emit("userSelector", this.selectedUser);
+        this.selectedUser = "";
       },
       emitNewUserCreator() {
         if (this.booleans[0].newUser)

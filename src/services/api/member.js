@@ -38,6 +38,28 @@ export function getMember() {
         .then(response => response.data)
 }
 
+export function getOneMember(_id) {
+    return axios.request({
+            method: 'get',
+            url: '/api/getMember',
+            data: {
+                _id,
+            }
+        })
+        .then(response => response.data)
+}
+
+export function getMemberForConnection(username) {
+    return axios.request({
+            method: 'get',
+            url: '/api/getMember',
+            data: {
+                username,
+            }
+        })
+        .then(response => response.data)
+}
+
 export function updateMember(_id, params, newValue) {
     return axios.request({
             method: 'put',

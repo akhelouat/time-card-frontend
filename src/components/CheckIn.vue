@@ -2,7 +2,7 @@
  * @ Author: Rahil Felix
  * @ Create Time: 2020-02-18 12:02:04
  * @ Modified by: Rahil Felix
- * @ Modified time: 2020-02-24 15:25:13
+ * @ Modified time: 2020-02-27 14:18:53
  * @ Description:
  -->
  
@@ -11,7 +11,6 @@
     <div>
         <form @submit="checkForm">
             <h3>We are : <span> {{ createdAtDisplay }}</span></h3>
-            <p>{{ checkTime }}</p>
             <button type="submit">benjam?</button>
         </form>
         <p v-if="send"> {{send}}</p>
@@ -19,12 +18,18 @@
 </template>
 
 <script>
+    import {
+        getOneMember,
+        updateMember
+    } from "../services/api/member"
     const moment = require('moment')
     export default {
         data: () => {
             return {
                 send: null,
-                registed: false
+                registed: false,
+                member: [],
+                error: ''
             };
         },
         computed: {
@@ -37,14 +42,17 @@
                     tooEarlyTime = moment('08:00:00', format),
                     tooLateTime = moment('09:30:00', format),
                     afterTime = moment('17:00:00', format);
+                    //to early
                 if (time.isBefore(tooEarlyTime)) {
-                    return 'You cannot sign now, its too early'
+                    return -1;
+                    //in time
                 } else if (time.isBetween(tooEarlyTime, tooLateTime)) {
-                    return 'You are at time';
+                    return 0;
+                    //to late
                 } else if (time.isBetween(tooLateTime, afterTime)) {
-                    return 'You are late';
+                    return 1;
                 } else {
-                    return 'You cannot sign now';
+                    return 2;
                 }
             }
         },
@@ -67,7 +75,26 @@
                     this.send = 'You are late';
                 }
                 e.preventDefault();
-            }
+            },
+            getMember: function() {
+                getOneMember()
+                    .then(member => {
+                        this.member = member;
+                    })
+                    .catch(error => {
+                        this.error = error;
+                    });
+                if (!this.member.presence[moment()]) {
+                    this.member.presence[moment()].push()
+                    updateMember(this.member._id, this.member.presence)
+                        .then(member => {
+                            this.member = member;
+                        })
+                        .catch(error => {
+                            this.error = error;
+                        });
+                }
+            },
         }
     };
 </script>
