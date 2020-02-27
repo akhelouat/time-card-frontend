@@ -3,30 +3,31 @@
         <h1>{{ title }}:</h1>
         <!-- User names -->
         <div class="control-container">
-            <input type="text" name="fist-name" placeholder="First Name" v-model="user.firstName"/>
-            <input type="text" name="last-name" placeholder="Last name" v-model="user.lastName"/>
+            <input type="text" name="fist-name" placeholder="First Name" v-model="user.firstName" />
+            <input type="text" name="last-name" placeholder="Last name" v-model="user.lastName" />
         </div>
         <!--  User address -->
         <div class="control-container">
-            <input type="text" name="address" placeholder="Address" v-model="user.address"/>
-            <input type="text" name="address-cp" placeholder="CP address" v-model="user.addressCp"/>
+            <input type="text" name="address" placeholder="Address" v-model="user.address" />
+            <input type="text" name="address-cp" placeholder="CP address" v-model="user.addressCp" />
         </div>
-        <input type="text" name="mail" placeholder="mail" v-model="user.mail"/>
-        <input type="text" name="mobile-number" placeholder="mobile" v-model="user.mobile"/>
-        <input type="text" name="pole-emploi-number" placeholder="pole emploi Id" v-model="user.poleEmploiId"/>
-        
-        <select class="promo-selector" name="promo" v-model="user.promo">
-            <option value="">Please choose a promo</option>
-            <option v-for="promo in promos" :key="promo.name" :value="promo.name">{{ promo.name }}</option>
-        </select>
-
+        <input type="text" name="mail" placeholder="mail" v-model="user.mail" />
+        <input type="text" name="mobile-number" placeholder="mobile" v-model="user.mobileNumber" />
+        <input type="text" name="pole-emploi-number" placeholder="pole emploi Id" v-model="user.poleEmploiNumber" />
+        <select class="promo-selector" name="promo" v-model="user.namePromo">
+                <option value="">Please choose a promo</option>
+                <option v-for="promo in promos" :key="promo.name" :value="promo.name" >{{ promo.name }}</option>
+            </select>
         <div class="control-container">
-            <button href="#">Create User</button>
+            <button href="#" @click=" createMember()">Create User</button>
         </div>
     </div>
 </template>
 
 <script>
+    import {
+        addMember
+    } from "../../services/api/member";
     export default {
         props: ["users", "promos"],
         data() {
@@ -38,10 +39,28 @@
                     address: "",
                     addressCp: "",
                     mail: "",
-                    mobile: "",
-                    poleEmploiId: "",
-                    promo: ""
+                    mobileNumber: "",
+                    poleEmploiNumber: "",
+                    namePromo: ""
                 }
+            }
+        },
+        methods: {
+            createMember() {
+                addMember(this.user.firstName, this.user.lastName, this.user.mail, this.user.address, this.user.addressCP, this.user.mobileNumber, this.user.poleEmploiNumber, this.user.namePromo)
+                    .then(() => {
+                        this.user.firstName = '';
+                        this.user.lastName = '';
+                        this.user.mail = '';
+                        this.user.address = '';
+                        this.user.addressCP = '';
+                        this.user.mobileNumber = '';
+                        this.user.poleEmploiNumber = '';
+                        this.user.namePromo = ''
+                    })
+                    .catch((error) => {
+                        this.error = error;
+                    });
             }
         }
     }
