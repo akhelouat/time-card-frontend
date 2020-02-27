@@ -15,7 +15,7 @@
         <input type="text" name="mobile-number" placeholder="mobile" v-model="user.mobile"/>
         <input type="text" name="pole-emploi-number" placeholder="pole emploi Id" v-model="user.poleEmploiId"/>
         
-        <select class="promo-selector" name="promo" v-model="selectedPromo">
+        <select class="promo-selector" name="promo" v-model="user.promo">
             <option value="">Please choose a promo</option>
             <option v-for="promo in promos" :key="promo.name" :value="promo.name">{{ promo.name }}</option>
         </select>
