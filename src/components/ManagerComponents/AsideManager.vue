@@ -19,7 +19,7 @@
     <!-- Users promotions links -->
     <ol id="users-container">
       <li v-for="user in users" :key="user.firstName">
-        <a v-if="user.promo === selectedPromo" @click="getSelectedUser(user), emitSelectedUser()" href="#">{{ user.firstName + ' ' + user.lastName }}</a>
+        <a v-if="user.namePromo === selectedPromo" @click="getSelectedUser(user), emitSelectedUser()" href="#">{{ user.firstName + ' ' + user.lastName }}</a>
       </li>
     </ol>
   </aside>
