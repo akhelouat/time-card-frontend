@@ -3,23 +3,21 @@
         <h1>{{ title }}:</h1>
         <!-- User names -->
         <div class="control-container">
-            <input type="text" name="fist-name" placeholder="First Name" v-model="user.firstName"/>
-            <input type="text" name="last-name" placeholder="Last name" v-model="user.lastName"/>
+            <input type="text" name="fist-name" placeholder="First Name" v-model="user.firstName" />
+            <input type="text" name="last-name" placeholder="Last name" v-model="user.lastName" />
         </div>
         <!--  User address -->
         <div class="control-container">
-            <input type="text" name="address" placeholder="Address" v-model="user.address"/>
-            <input type="text" name="address-cp" placeholder="CP address" v-model="user.addressCp"/>
+            <input type="text" name="address" placeholder="Address" v-model="user.address" />
+            <input type="text" name="address-cp" placeholder="CP address" v-model="user.addressCp" />
         </div>
-        <input type="text" name="mail" placeholder="mail" v-model="user.mail"/>
-        <input type="text" name="mobile-number" placeholder="mobile" v-model="user.mobile"/>
-        <input type="text" name="pole-emploi-number" placeholder="pole emploi Id" v-model="user.poleEmploiId"/>
-        
+        <input type="text" name="mail" placeholder="mail" v-model="user.mail" />
+        <input type="text" name="mobile-number" placeholder="mobile" v-model="user.mobile" />
+        <input type="text" name="pole-emploi-number" placeholder="pole emploi Id" v-model="user.poleEmploiId" />
         <select class="promo-selector" name="promo" v-model="user.promo">
-            <option value="">Please choose a promo</option>
-            <option v-for="promo in promos" :key="promo.name" :value="promo.name">{{ promo.name }}</option>
-        </select>
-
+                <option value="">Please choose a promo</option>
+                <option v-for="promo in promos" :key="promo.name" :value="promo.name">{{ promo.name }}</option>
+            </select>
         <div class="control-container">
             <button href="#">Create User</button>
         </div>
