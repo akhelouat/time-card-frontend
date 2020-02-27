@@ -18,16 +18,21 @@ export function addMember(nom, prenom, email, adress, cp, phone, idPole) {
         .then(response => response.data)
 }
 
-
-
-export function getMember(email) {
+export function getMemberByPromo(Promo) {
     return axios.request({
             method: 'get',
-            url: '/api/getMember',
+            url: '/api/getMemberByPromo',
             data: {
-                email
-                }
+                Promo,
+            }
+        })
+        .then(response => response.data)
+}
 
+export function getMember() {
+    return axios.request({
+            method: 'get',
+            url: '/api/getMember'
         })
         .then(response => response.data)
 }
@@ -38,8 +43,8 @@ export function updateMember(_id, params, newValue) {
             url: '/api/updateMember',
             data: {
                 _id,
-                [params] : newValue,
-                }
+                [params]: newValue,
+            }
 
         })
         .then(response => response.data)
@@ -51,7 +56,7 @@ export function deleteMember(_id) {
             url: '/api/deleteMember',
             data: {
                 _id
-                }
+            }
 
         })
         .then(response => response.data)

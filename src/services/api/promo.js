@@ -5,9 +5,9 @@ export function addPromo(name, start, end) {
             method: 'post',
             url: '/api/addPromo',
             data: {
-             name,
-             start,
-             end
+                name,
+                start,
+                end
             }
         })
         .then(response => response.data);
@@ -17,9 +17,6 @@ export function getPromo() {
     return axios.request({
             method: 'get',
             url: '/api/getPromo',
-            data: {
-                name
-                }
         })
         .then(response => response.data);
 }
@@ -30,8 +27,8 @@ export function updatePromo(_id, params, newValue) {
             url: '/api/updatePromo',
             data: {
                 _id,
-                [params] : newValue,
-                }
+                [params]: newValue,
+            }
         })
         .then(response => response.data);
 }
@@ -42,7 +39,7 @@ export function deletePromo(name) {
             url: '/api/deletePromo',
             data: {
                 name
-                }
+            }
         })
         .then(response => response.data);
 }
