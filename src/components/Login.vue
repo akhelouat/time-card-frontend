@@ -2,19 +2,21 @@
     <div class="container">
         <div class="form-control">
             <div v-show="error">{{ error }}</div>
-            <input type="text" name="username" placeholder="username" v-model="user.name">
+            <input type="text" name="username" placeholder="username" v-model="user.username">
             <input type="text" name="password" placeholder="password" v-model="user.password">
-            <button href="#" @click="isEmpty(user)">Log in</button>
+            <button href="#" @click="getLoggedMember(user.username)">Log in</button>
         </div>
     </div>
 </template>
 
 <script>
+    import { getMemberForConnection } from '../services/api/member';
+
     export default {
         data: () => {
             return {
                 user: {
-                    name: "",
+                    username: "",
                     password: "",
                 },
                 error: ""
@@ -26,6 +28,10 @@
                     return this.error = "Error : empty values";
                 else
                     return this.error = "Ok!";
+            },
+            getLoggedMember(username)
+            {
+                getMemberForConnection(username)
             }
         }
     }
