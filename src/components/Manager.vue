@@ -1,9 +1,16 @@
 <template>
     <div id="Manager">
-        <AsideManager :promos="promos" :users="users" v-on:newUserCreator="getNewUserCreator" v-on:newPromoCreator="getNewPromoCreator" v-on:userSelector="getSelectedUser" />
-        <UserUpdater :user="selectedUser" v-on:userCanceled="getSelectedUser" />
-        <UserCreator v-if="newUser" :users="users" :promos="promos" />
-        <PromoCreator v-if="newPromo" />
+        <AsideManager :promos="promos" :users="users" v-on:newUserCreator="getNewUserCreator" v-on:newPromoCreator="getNewPromoCreator" v-on:userSelector="getSelectedUser" />    
+        <transition v-if="selectedUser" name="slide-fade">
+            <UserUpdater :user="selectedUser" v-on:userCanceled="getSelectedUser" />
+        </transition>
+        <transition name="slide-fade">
+            <UserCreator v-if="newUser" :users="users" :promos="promos" />
+        </transition>
+
+        <transition name="slide-fade">
+            <PromoCreator v-if="newPromo"/>
+        </transition>
     </div>
 </template>
 
@@ -74,3 +81,19 @@
         },
     }
 </script>
+
+<style>
+.slide-fade-enter-active{
+    transition: all .3s ease;
+}
+.slide-fade-leave-active{
+    transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter{
+    transform: translateY(-25px);
+}
+.slide-fade-leave-to{
+    transform: translateX(-5%);
+    opacity: 0;
+}
+</style>
