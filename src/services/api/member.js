@@ -51,7 +51,7 @@ export function getOneMember(_id) {
 
 export function getMemberForConnection(username) {
     return axios.request({
-            method: 'get',
+            method: 'post',
             url: '/api/getMemberForConnection',
             data: {
                 username,
