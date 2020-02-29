@@ -23,7 +23,7 @@
             </div>
             <span>Between : {{start}} and {{end}}</span>
             <div class="control-container">
-                <button type="submit">add Promo</button>
+                  <button href="#" @click=" createPromo()">add Promo</button>
             </div>
         </form>
     </div>
@@ -31,6 +31,7 @@
 
 <script>
     const moment = require('moment');
+    import { addPromo } from "../../services/api/promo";
     import DatePick from 'vue-date-pick';
     import 'vue-date-pick/dist/vueDatePick.css';
     export default {
@@ -39,15 +40,24 @@
             return {
                 title: 'new Promo',
                 errors: [],
-                nom: null,
-                start: moment().format('DD.MM.YYYY'),
-                end: moment().format('DD.MM.YYYY')
+                nom: '',
+                start: '',
+                end: ''
             };
         },
         components: {
             DatePick
         },
         methods: {
+                createPromo() {
+                addPromo(this.name, this.start, this.end)
+                    .then(() => {
+                        this.name = ''
+                    })
+                    .catch((error) => {
+                        this.error = error;
+                    });
+            },
             checkForm: function(e) {
                 const starttime = moment(this.start, 'DD.MM.YYYY')
                 const endtime = moment(this.end, 'DD.MM.YYYY')
