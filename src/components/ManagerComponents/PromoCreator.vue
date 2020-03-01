@@ -1,4 +1,4 @@
-<!--
+https://ci.lina<!--
  * @ Author: Rahil Felix
  * @ Create Time: 2020-02-20 09:29:58
  * @ Modified by: Rahil Felix
@@ -16,7 +16,7 @@
         </p>
         <form class="form-control" @submit="checkForm">
             <h1>{{ title }}:</h1>
-            <input type="text" name="nom" id="nom" placeholder="Promo Name" v-model="nom">
+            <input type="text" name="nom" id="nom" placeholder="Promo Name" v-model="name">
             <div class="control-container">
                 <date-pick v-model="start" :displayFormat="'DD.MM.YYYY'" :format="'DD.MM.YYYY'"></date-pick>
                 <date-pick v-model="end" :displayFormat="'DD.MM.YYYY'" :format="'DD.MM.YYYY'"></date-pick>
@@ -40,7 +40,7 @@
             return {
                 title: 'new Promo',
                 errors: [],
-                nom: '',
+                name: '',
                 start: '',
                 end: ''
             };
