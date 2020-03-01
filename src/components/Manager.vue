@@ -23,7 +23,7 @@
     } from '../services/api/member';
     import AsideManager from './ManagerComponents/AsideManager';
     import UserUpdater from './ManagerComponents/UserUpdater';
-    import UserCreator from './ManagerComponents/UserCreator';
+    import UserCreator from './ManagerComponents/Test';
     import PromoCreator from './ManagerComponents/PromoCreator';
     export default {
         components: {
