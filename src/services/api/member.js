@@ -49,12 +49,13 @@ export function getOneMember(_id) {
         .then(response => response.data)
 }
 
-export function getMemberForConnection(username) {
+export function login(username, password) {
     return axios.request({
             method: 'post',
-            url: '/api/getMemberForConnection',
+            url: '/api/login',
             data: {
                 username,
+                password
             }
         })
         .then(response => response.data)

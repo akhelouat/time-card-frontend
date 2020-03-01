@@ -4,13 +4,13 @@
             <div v-show="error">{{ error }}</div>
             <input type="text" name="username" placeholder="username" v-model="user.username">
             <input type="text" name="password" placeholder="password" v-model="user.password">
-            <button href="#" @click="getLoggedMember(user.username)">Log in</button>
+            <button href="#" @click="getLoggedMember()">Log in</button>
         </div>
     </div>
 </template>
 
 <script>
-    import { getMemberForConnection } from '../services/api/member';
+    import { login } from '../services/api/member';
 
     export default {
         data: () => {
@@ -29,9 +29,9 @@
                 else
                     return this.error = "Ok!";
             },
-            getLoggedMember(username)
+            getLoggedMember()
             {
-                getMemberForConnection(username)
+                login(this.user.username, this.user.password)
             }
         }
     }
