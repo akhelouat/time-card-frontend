@@ -1,28 +1,66 @@
 <template>
-  <aside>
-    <h1>{{ title }}</h1>
-    <!-- Promotions links -->
-    <ol id="promotions-container">
-      <!-- New User -->
-      <li>
-        <a href="#" @click="emitNewUserCreator()">New User</a>
-      </li>
-      <!-- New  Promo -->
-      <li>
-        <a href="#" @click="emitNewPromoCreator()">New Promo</a>
-      </li>
-      <!-- Links promos -->
-      <li v-for="promotion in promos" :key="promotion.name">
-        <a href="#" @click="getSelectedPromo(promotion.name)">{{ promotion.name }}</a>
-      </li>
-    </ol>
-    <!-- Users promotions links -->
-    <ol id="users-container">
-      <li v-for="user in users" :key="user.firstName">
-        <a v-if="user.namePromo === selectedPromo" @click="getSelectedUser(user), emitSelectedUser()" href="#">{{ user.firstName + ' ' + user.lastName }}</a>
-      </li>
-    </ol>
-  </aside>
+  <v-navigation-drawer permanent expand-on-hover dark>
+    <v-list>
+      <!-- Admin Avatar :) -->
+      <v-list-item class="px-2">
+        <v-list-item-avatar>
+          <v-img src="https://randomuser.me/api/portraits/women/75.jpg"></v-img>
+        </v-list-item-avatar>
+      </v-list-item>
+      <!-- Admin info -->
+      <v-list-item link>
+        <v-list-item-content>
+          <v-list-item-title class="title">Admin</v-list-item-title>
+          <v-list-item-subtitle>mdr@lol.com</v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+    </v-list>
+
+    <!-- New User -->
+    <v-divider></v-divider>
+    <v-list nav dense>
+    <v-list-item-title>Manage</v-list-item-title>
+      <v-divider></v-divider>
+      <v-list-item link @click="emitNewUserCreator()">
+        <v-list-item-icon>
+          <v-icon>mdi-plus-thick</v-icon>
+        </v-list-item-icon>
+        <v-list-item-title>New User</v-list-item-title>
+      </v-list-item>
+
+      <!-- New promo -->
+      <v-list-item link @click="emitNewPromoCreator()">
+        <v-list-item-icon>
+          <v-icon>mdi-plus-thick</v-icon>
+        </v-list-item-icon>
+        <v-list-item-title>New Promo</v-list-item-title>
+      </v-list-item>
+
+      <!-- Promos -->
+      <v-divider></v-divider>
+      <v-list-item-title>Promos</v-list-item-title>
+      <v-divider></v-divider>
+      <v-list-item link v-for="promotion in promos" :key="promotion.name" @click="getSelectedPromo(promotion.name)">
+        <v-list-item-icon>
+          <v-icon>mdi-account-group</v-icon>
+        </v-list-item-icon>
+        <v-list-item-title>{{ promotion.name }}</v-list-item-title>
+      </v-list-item>
+
+      <!-- Users -->
+      <v-divider></v-divider>
+      <div v-if="selectedPromo">{{ selectedPromo }} Students</div>
+      <v-divider></v-divider>
+      <div v-for="user in users" :key="user.firstName">
+        <v-list-item link v-if="user.namePromo === selectedPromo" @click="getSelectedUser(user), emitSelectedUser()">
+          <v-list-item-icon>
+            <v-icon>mdi-account</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>{{ user.firstName + ' ' + user.lastName }}</v-list-item-title>
+        </v-list-item>
+      </div>
+    </v-list>
+  </v-navigation-drawer>
 </template>
 
 <script>
@@ -77,32 +115,6 @@
 
 <style scoped>
   aside {
-    background-color: #121212;
-    width: 15%;
     position: fixed;
-    top: 60px;
-    left: 0;
-    bottom: 0;
-  }
-  h1 {
-    color: #fafafa;
-    background-color: red;
-    margin: 0;
-  }
-  ol {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  li {
-    width: 100%;
-    list-style: none;
-  }
-  li:hover {
-    background: gray;
-  }
-  a {
-    color: #fafafa;
-    text-decoration: none;
   }
 </style>
