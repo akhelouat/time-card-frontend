@@ -49,24 +49,25 @@ export function getOneMember(_id) {
         .then(response => response.data)
 }
 
-export function getMemberForConnection(username) {
+export function login(username, password) {
     return axios.request({
             method: 'post',
-            url: '/api/getMemberForConnection',
+            url: '/api/login',
             data: {
                 username,
+                password
             }
         })
         .then(response => response.data)
 }
 
-export function updateMember(_id, params, newValue) {
+export function updateMember(_id, params, newValue1) {
     return axios.request({
             method: 'put',
             url: '/api/updateMember',
             data: {
                 _id,
-                [params]: newValue,
+                [params]: newValue1,
             }
 
         })

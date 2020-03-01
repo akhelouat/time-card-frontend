@@ -1,4 +1,4 @@
-<!--
+https://ci.lina<!--
  * @ Author: Rahil Felix
  * @ Create Time: 2020-02-20 09:29:58
  * @ Modified by: Rahil Felix
@@ -16,14 +16,14 @@
         </p>
         <form class="form-control" @submit="checkForm">
             <h1>{{ title }}:</h1>
-            <input type="text" name="nom" id="nom" placeholder="Promo Name" v-model="nom">
+            <input type="text" name="nom" id="nom" placeholder="Promo Name" v-model="name">
             <div class="control-container">
                 <date-pick v-model="start" :displayFormat="'DD.MM.YYYY'" :format="'DD.MM.YYYY'"></date-pick>
                 <date-pick v-model="end" :displayFormat="'DD.MM.YYYY'" :format="'DD.MM.YYYY'"></date-pick>
             </div>
             <span>Between : {{start}} and {{end}}</span>
             <div class="control-container">
-                <button type="submit">add Promo</button>
+                  <button href="#" @click=" createPromo()">add Promo</button>
             </div>
         </form>
     </div>
@@ -31,6 +31,7 @@
 
 <script>
     const moment = require('moment');
+    import { addPromo } from "../../services/api/promo";
     import DatePick from 'vue-date-pick';
     import 'vue-date-pick/dist/vueDatePick.css';
     export default {
@@ -39,15 +40,24 @@
             return {
                 title: 'new Promo',
                 errors: [],
-                nom: null,
-                start: moment().format('DD.MM.YYYY'),
-                end: moment().format('DD.MM.YYYY')
+                name: '',
+                start: '',
+                end: ''
             };
         },
         components: {
             DatePick
         },
         methods: {
+                createPromo() {
+                addPromo(this.name, this.start, this.end)
+                    .then(() => {
+                        this.name = ''
+                    })
+                    .catch((error) => {
+                        this.error = error;
+                    });
+            },
             checkForm: function(e) {
                 const starttime = moment(this.start, 'DD.MM.YYYY')
                 const endtime = moment(this.end, 'DD.MM.YYYY')
