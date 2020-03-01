@@ -4,79 +4,79 @@
           <p>First Name</p>
           <h2>{{ user.firstName }}</h2><button v-if="penToHidden !== 'firstName'" @click="editDisplay('firstName')">Edit</button>
           <div v-if="edit === 'firstName'" class="updateValue">
-              <input type="text"/>
+              <input type="text" v-model="valueToUpdate"/>
               <button @click="editDisplay()">Cancel</button>
-              <button>Edit</button>
+              <button @click="updateUser()">Edit</button>
           </div>
       </div>
        <div class="information">
               <p>Last Name</p>
           <h2>{{ user.lastName }}</h2><button v-if="penToHidden !== 'lastName'" @click="editDisplay('lastName')">Edit</button>
           <div v-if="edit === 'lastName'" class="updateValue">
-              <input type="text"/>
-              <button @click="editDisplay()">Cancel</button>
-              <button>Edit</button>
+              <input type="text" v-model="valueToUpdate"/>
+              <button @click="editDisplay()" >Cancel</button>
+              <button @click="updateUser()">Edit</button>
           </div>
       </div>
        <div class="information">
               <p>Email</p>
           <h2>{{ user.mail }}</h2><button v-if="penToHidden !== 'mail'" @click="editDisplay('mail')">Edit</button>
           <div v-if="edit === 'mail'" class="updateValue">
-              <input type="text"/>
+              <input type="text" v-model="valueToUpdate"/>
               <button @click="editDisplay()">Cancel</button>
-              <button>Edit</button>
+              <button @click="updateUser()">Edit</button>
           </div>
       </div>
        <div class="information">
               <p>Address</p>
           <h2>{{ user.address }}</h2><button v-if="penToHidden !== 'address'" @click="editDisplay('address')">Edit</button>
           <div v-if="edit === 'address'" class="updateValue">
-              <input type="text"/>
+              <input type="text" v-model="valueToUpdate"/>
               <button @click="editDisplay()">Cancel</button>
-              <button>Edit</button>
+              <button @click="updateUser()">Edit</button>
           </div>
       </div>
        <div class="information">
               <p>Postal Code</p>
           <h2>{{ user.addressCP }}</h2><button v-if="penToHidden !== 'addressCP'" @click="editDisplay('addressCP')">Edit</button>
           <div v-if="edit === 'addressCP'" class="updateValue">
-              <input type="text"/>
+              <input type="text" v-model="valueToUpdate"/>
               <button @click="editDisplay()">Cancel</button>
-              <button>Edit</button>
+              <button @click="updateUser()">Edit</button>
           </div>
       </div>
        <div class="information">
               <p>Pole Emploi Number</p>
           <h2>{{ user.poleEmploiNumber }}</h2><button v-if="penToHidden !== 'poleEmploiNumber'" @click="editDisplay('poleEmploiNumber')">Edit</button>
           <div v-if="edit === 'poleEmploiNumber'" class="updateValue">
-              <input type="text"/>
+              <input type="text" v-model="valueToUpdate"/>
               <button @click="editDisplay()">Cancel</button>
-              <button>Edit</button>
+              <button @click="updateUser()">Edit</button>
           </div>
       </div>
             <div class="information">
               <p>Mobile Number</p>
           <h2>{{ user.mobileNumber }}</h2><button v-if="penToHidden !== 'mobileNumber'" @click="editDisplay('mobileNumber')">Edit</button>
           <div v-if="edit ==='mobileNumber'" class="updateValue">
-              <input type="text"/>
+              <input type="text" v-model="valueToUpdate"/>
               <button @click="editDisplay()">Cancel</button>
-              <button>Edit</button>
+              <button @click="updateUser()">Edit</button>
           </div>
       </div>
        <div class="information">
               <p>Promo</p>
           <h2>{{ user.namePromo }}</h2><button v-if="penToHidden !== 'namePromo'" @click="editDisplay('namePromo')">Edit</button>
           <div v-if="edit === 'namePromo'" class="updateValue">
-              <input type="text"/>
+              <input type="text" v-model="valueToUpdate"/>
               <button @click="editDisplay()">Cancel</button>
-              <button>Edit</button>
+              <button @click="updateUser()">Edit</button>
           </div>
       </div>
     </div>
 </template>
 
 <script>
-    //import { updateMember } from "../../services/api/member";
+    import { updateMember } from "../../services/api/member";
     export default {
         props: ["user"],
         data() {
@@ -86,6 +86,8 @@
                 test: false,
                 penToHidden: null,
                 edit: null,
+                valueToUpdate: null,
+                paramsToUpdate: "firstName",
                 users: {
                     firstName: "",
                     lastName: "",
@@ -93,19 +95,20 @@
                 }, 
             }
         },
-        methods: { /*
+        methods: { 
                        updateUser() {
-                updateMember(this.user.firstName)
+                updateMember(this.user._id, this.paramsToUpdate, this.valueToUpdate)
                     .then(() => {
                     })
                     .catch((error) => {
                         this.error = error;
                     });
-            },*/
+            },
             deleteSelectedUser() {
                 this.$emit('userCanceled', this.reset);
             },
             editDisplay(object) {
+                   this.paramsToUpdate = object;
                    this.edit = object;
                    this.penToHidden = object
                

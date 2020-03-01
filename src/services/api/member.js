@@ -60,13 +60,13 @@ export function getMemberForConnection(username) {
         .then(response => response.data)
 }
 
-export function updateMember(_id, params1, newValue1) {
+export function updateMember(_id, params, newValue1) {
     return axios.request({
             method: 'put',
             url: '/api/updateMember',
             data: {
                 _id,
-                [params1]: newValue1,
+                [params]: newValue1,
             }
 
         })
