@@ -49,7 +49,7 @@
 
       <!-- Users -->
       <v-divider></v-divider>
-      <div v-if="selectedPromo">{{ selectedPromo }} Students</div>
+      <v-list-item-title v-if="selectedPromo">{{ selectedPromo }} Students</v-list-item-title>
       <v-divider></v-divider>
       <div v-for="user in users" :key="user.firstName">
         <v-list-item link v-if="user.namePromo === selectedPromo" @click="getSelectedUser(user), emitSelectedUser()">
