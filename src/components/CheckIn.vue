@@ -2,17 +2,15 @@
  * @ Author: Rahil Felix
  * @ Create Time: 2020-02-18 12:02:04
  * @ Modified by: Rahil Felix
- * @ Modified time: 2020-02-27 14:18:53
+ * @ Modified time: 2020-02-27 16:36:04
  * @ Description:
  -->
  
 
 <template>
     <div>
-        <form @submit="checkForm">
             <h3>We are : <span> {{ createdAtDisplay }}</span></h3>
-            <button type="submit">benjam?</button>
-        </form>
+            <button @click="checkForm">benjam?</button>
         <p v-if="send"> {{send}}</p>
     </div>
 </template>
@@ -27,7 +25,6 @@
         data: () => {
             return {
                 send: null,
-                registed: false,
                 member: [],
                 error: ''
             };
@@ -36,13 +33,47 @@
             createdAtDisplay() {
                 return moment().format('YYYY-MM-DD HH:mm');
             },
+        },
+        methods: {
+            checkForm: function(e) {
+                var format = 'HH:mm:ss'
+                var time = moment(),
+                    tooEarlyTime = moment('08:00:00', format),
+                    tooLateTime = moment('09:30:00', format),
+                    afterTime = moment('17:00:00', format);
+                if (time.isBetween(tooEarlyTime, tooLateTime)) {
+                    console.log('You are at time')
+                    this.checkSign()
+                    this.send = 'You are at time';
+                } else if (time.isBefore(tooEarlyTime)) {
+                    this.send = 'You cannot sign now, its too early';
+                } else if (time.isBetween(tooLateTime, afterTime)) {
+                    console.log('You are late')
+                    this.checkSign()
+                    this.send = 'You are late';
+                }
+                e.preventDefault();
+            },
+            checkSign: function() {
+                this.member.presence[0]=2
+                if (this.member.presence[0]===2) {
+                    console.log('inin')
+                    this.member.presence[0].push(this.checkTime())
+                    console.log(this.member.presence[0])
+                    updateMember(this.member._id, 'presence', this.member.presence)
+                        .then(() => console.log('inserted'))
+                        .catch(error => {
+                            this.error = error;
+                        });
+                }
+            },
             checkTime() {
                 var format = 'HH:mm:ss'
                 var time = moment(),
                     tooEarlyTime = moment('08:00:00', format),
                     tooLateTime = moment('09:30:00', format),
                     afterTime = moment('17:00:00', format);
-                    //to early
+                //to early
                 if (time.isBefore(tooEarlyTime)) {
                     return -1;
                     //in time
@@ -56,45 +87,15 @@
                 }
             }
         },
-        methods: {
-            checkForm: function(e) {
-                var format = 'HH:mm:ss'
-                var time = moment(),
-                    tooEarlyTime = moment('08:00:00', format),
-                    tooLateTime = moment('09:30:00', format),
-                    afterTime = moment('17:00:00', format);
-                if (this.registed === true) {
-                    this.send = 'already sign';
-                } else if (time.isBetween(tooEarlyTime, tooLateTime)) {
-                    this.registed = true;
-                    this.send = 'You are at time';
-                } else if (time.isBefore(tooEarlyTime)) {
-                    this.send = 'You cannot sign now, its too early';
-                } else if (time.isBetween(tooLateTime, afterTime)) {
-                    this.registed = true;
-                    this.send = 'You are late';
-                }
-                e.preventDefault();
-            },
-            getMember: function() {
-                getOneMember()
-                    .then(member => {
-                        this.member = member;
-                    })
-                    .catch(error => {
-                        this.error = error;
-                    });
-                if (!this.member.presence[moment()]) {
-                    this.member.presence[moment()].push()
-                    updateMember(this.member._id, this.member.presence)
-                        .then(member => {
-                            this.member = member;
-                        })
-                        .catch(error => {
-                            this.error = error;
-                        });
-                }
-            },
+        created() {
+            console.log('cr')
+            getOneMember("5e579b5150458e2465029b09")
+                .then(member => {
+                    this.member = member;
+                })
+                .catch(error => {
+                    this.error = error;
+                });
         }
     };
 </script>
