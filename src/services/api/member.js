@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-export function addMember(firstName, lastName, mail, address, addressCP, mobileNumber, poleEmploiNumber, namePromo) {
+export function addMember(firstName, lastName, mail, address, addressCP, mobileNumber, poleEmploiNumber, namePromo, presence) {
     return axios.request({
             method: 'post',
             url: '/api/addMember',
@@ -12,17 +12,18 @@ export function addMember(firstName, lastName, mail, address, addressCP, mobileN
                 addressCP,
                 mobileNumber,
                 poleEmploiNumber,
-                namePromo
+                namePromo,
+                presence
             }
 
         })
         .then(response => response.data)
 }
 
-export function getMemberByPromo(Promo) {
+export function getMemberByPromo(promo) {
     return axios.request({
             method: 'get',
-            url: '/api/getMemberByPromo/' + Promo,
+            url: '/api/getMemberByPromo/' + promo,
 
         })
         .then(response => response.data)
