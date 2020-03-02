@@ -22,10 +22,8 @@ export function addMember(firstName, lastName, mail, address, addressCP, mobileN
 export function getMemberByPromo(Promo) {
     return axios.request({
             method: 'get',
-            url: '/api/getMemberByPromo',
-            data: {
-                Promo,
-            }
+            url: '/api/getMemberByPromo/' + Promo,
+
         })
         .then(response => response.data)
 }
@@ -41,10 +39,8 @@ export function getMember() {
 export function getOneMember(_id) {
     return axios.request({
             method: 'get',
-            url: '/api/getMember',
-            data: {
-                _id,
-            }
+            url: '/api/getMember/' + _id,
+
         })
         .then(response => response.data)
 }
