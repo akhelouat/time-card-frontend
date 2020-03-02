@@ -1,39 +1,58 @@
-https://ci.lina<!--
- * @ Author: Rahil Felix
- * @ Create Time: 2020-02-20 09:29:58
- * @ Modified by: Rahil Felix
- * @ Modified time: 2020-02-27 13:48:33
- * @ Description:
- -->
-
 <template>
-    <div>
-        <p v-if="errors.length>0">
-            <b>Please correct the following error(s):</b>
-            <ul>
-                <li v-for="error in errors" :key="error">{{ error }}</li>
-            </ul>
-        </p>
-        <form class="form-control" @submit="checkForm">
-            <h1>{{ title }}:</h1>
-            <input type="text" name="nom" id="nom" placeholder="Promo Name" v-model="name">
-            <div class="control-container">
-                <date-pick v-model="start" :displayFormat="'DD.MM.YYYY'" :format="'DD.MM.YYYY'"></date-pick>
-                <date-pick v-model="end" :displayFormat="'DD.MM.YYYY'" :format="'DD.MM.YYYY'"></date-pick>
-            </div>
-            <span>Between : {{start}} and {{end}}</span>
-            <div class="control-container">
-                  <button href="#" @click=" createPromo()">add Promo</button>
-            </div>
-        </form>
-    </div>
+    <v-container class="mt-12">
+        <v-form>
+            <!-- Promotion name -->
+            <v-text-field
+                v-model="name"
+                :counter="15"
+                label="Promotion Name"
+                required
+            />
+            <!-- Start date picker -->
+            <v-menu ref="menu" v-model="menu" :close-on-content-click="false" :return-value.sync="start" transition="scale-transition" offset-y min-width="290px">
+                <template v-slot:activator="{ on }">
+                    <v-text-field
+                        v-model="start"
+                        label="Promotion starting date"
+                        readonly
+                        v-on="on"
+                        required
+                    />
+                </template>
+                <v-date-picker v-model="start" no-title scrollable>
+                <v-spacer></v-spacer>
+                <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
+                <v-btn text color="primary" @click="$refs.menu.save(start)">OK</v-btn>
+                </v-date-picker>
+            </v-menu>
+            <!-- End date picker -->
+            <v-menu ref="menu2" v-model="menu2" :close-on-content-click="false" :return-value.sync="end" transition="scale-transition" offset-y min-width="290px">
+                <template v-slot:activator="{ on }">
+                    <v-text-field
+                        v-model="end"
+                        label="Promotion ending date"
+                        readonly
+                        v-on="on"
+                        required
+                    />
+                </template>
+                <v-date-picker v-model="end" no-title scrollable>
+                <v-spacer></v-spacer>
+                <v-btn text color="primary" @click="menu2 = false">Cancel</v-btn>
+                <v-btn text color="primary" @click="$refs.menu2.save(end)">OK</v-btn>
+                </v-date-picker>
+            </v-menu>
+            <!-- Button validate -->
+            <v-btn color="success" class="mr-4" @click="createPromo()">Validate</v-btn>
+        </v-form>
+    </v-container>
 </template>
 
 <script>
     const moment = require('moment');
-    import { addPromo } from "../../services/api/promo";
-    import DatePick from 'vue-date-pick';
-    import 'vue-date-pick/dist/vueDatePick.css';
+    import {
+        addPromo
+    } from "../../services/api/promo";
     export default {
         props: ["PromoCreator"],
         data: () => {
@@ -41,15 +60,15 @@ https://ci.lina<!--
                 title: 'new Promo',
                 errors: [],
                 name: '',
-                start: '',
-                end: ''
+                start: new Date().toISOString().substr(0, 10),
+                end: new Date().toISOString().substr(0, 10),
+                menu: false,
+                menu2: false,
             };
         },
-        components: {
-            DatePick
-        },
+        components: {},
         methods: {
-                createPromo() {
+            createPromo() {
                 addPromo(this.name, this.start, this.end)
                     .then(() => {
                         this.name = ''
@@ -78,26 +97,8 @@ https://ci.lina<!--
 </script>
 
 <style scoped>
-    h1 {
-        background-color: #121212;
-        color: #fafafa;
-        width: 81%;
-    }
-    .form-control {
-        display: flex;
-        flex-direction: column;
-        width: 80%;
-        margin-left: 20%;
-    }
-    .control-container {
-        width: 100%;
-        display: flex;
-    }
-    .control-container>input {
-        width: 39.5%;
-    }
-    input {
-        width: 80%;
-        margin-bottom: 20px;
-    }
+form {
+  width: 50%;
+  margin-left: 20%;
+}
 </style>
