@@ -1,86 +1,158 @@
 <template>
-    <div id="updateUser">
-        <div class="information">
-            <p>First Name</p>
-            <h2>{{ user.firstName }}</h2><button v-if="penToHidden !== 'firstName'" @click="editDisplay('firstName')">Edit</button>
+<div>
+<button class="error" @click="deleteSelectedUser"><v-icon>mdi-cancel</v-icon> Cancel edition</button>
+  <v-simple-table class="tableEditor">
+    <template v-slot:default>
+      <thead>
+        <tr>
+          <th class="text-left">informations</th>
+          <th class="text-left">Values</th>
+          <th class="text-left">Editor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="text-left">
+            <td>First Name</td>
+            <td> {{user.firstName }}</td>
+            <td>
+                <button v-if="penToHidden !== 'firstName'" @click="editDisplay('firstName')"><v-icon>mdi-account-edit</v-icon></button>
             <div v-if="edit === 'firstName'" class="updateValue">
-                <input type="text" v-model="valueToUpdate" />
-                <button class="cancelButton" @click="editDisplay()">Cancel</button>
-                <button class="editButton" @click="updateUser()">Edit</button>
+                <v-text-field
+                    v-model="valueToUpdate"
+                    label="First Name"
+                    shaped
+                />
+                <button class="cancelButton" @click="editDisplay()"><v-icon>mdi-cancel</v-icon></button>
+                <button class="editButton" @click="updateUser()"><v-icon>mdi-shaker</v-icon></button>
                 <p class="updateResponse"> {{ updateResponse}} </p>
-            </div>
-        </div>
-        <div class="information">
-            <p>Last Name</p>
-            <h2>{{ user.lastName }}</h2><button v-if="penToHidden !== 'lastName'" @click="editDisplay('lastName')">Edit</button>
-            <div v-if="edit === 'lastName'" class="updateValue">
-                <input type="text" v-model="valueToUpdate" />
-                <button class="cancelButton" @click="editDisplay()">Cancel</button>
-                <button class="editButton" @click="updateUser()">Edit</button>
-                <p class="updateResponse"> {{ updateResponse}} </p>
-            </div>
-        </div>
-        <div class="information">
-            <p>Email</p>
-            <h2>{{ user.mail }}</h2><button v-if="penToHidden !== 'mail'" @click="editDisplay('mail')">Edit</button>
-            <div v-if="edit === 'mail'" class="updateValue">
-                <input type="text" v-model="valueToUpdate" />
-                <button class="cancelButton" @click="editDisplay()">Cancel</button>
-                <button class="editButton" @click="updateUser()">Edit</button>
-                <p class="updateResponse"> {{ updateResponse}} </p>
-            </div>
-        </div>
-        <div class="information">
-            <p>Address</p>
-            <h2>{{ user.address }}</h2><button v-if="penToHidden !== 'address'" @click="editDisplay('address')">Edit</button>
-            <div v-if="edit === 'address'" class="updateValue">
-                <input type="text" v-model="valueToUpdate" />
-                <button class="cancelButton" @click="editDisplay()">Cancel</button>
-                <button class="editButton" @click="updateUser()">Edit</button>
-                <p class="updateResponse"> {{ updateResponse}} </p>
-            </div>
-        </div>
-        <div class="information">
-            <p>Postal Code</p>
-            <h2>{{ user.addressCP }}</h2><button v-if="penToHidden !== 'addressCP'" @click="editDisplay('addressCP')">Edit</button>
-            <div v-if="edit === 'addressCP'" class="updateValue">
-                <input type="text" v-model="valueToUpdate" />
-                <button class="cancelButton" @click="editDisplay()">Cancel</button>
-                <button class="editButton" @click="updateUser()">Edit</button>
-                <p class="updateResponse"> {{ updateResponse}} </p>
-            </div>
-        </div>
-        <div class="information">
-            <p>Pole Emploi Number</p>
-            <h2>{{ user.poleEmploiNumber }}</h2><button v-if="penToHidden !== 'poleEmploiNumber'" @click="editDisplay('poleEmploiNumber')">Edit</button>
-            <div v-if="edit === 'poleEmploiNumber'" class="updateValue">
-                <input type="text" v-model="valueToUpdate" />
-                <button class="cancelButton" @click="editDisplay()">Cancel</button>
-                <button class="editButton" @click="updateUser()">Edit</button>
-                <p class="updateResponse"> {{ updateResponse}} </p>
-            </div>
-        </div>
-        <div class="information">
-            <p>Mobile Number</p>
-            <h2>{{ user.mobileNumber }}</h2><button v-if="penToHidden !== 'mobileNumber'" @click="editDisplay('mobileNumber')">Edit</button>
-            <div v-if="edit ==='mobileNumber'" class="updateValue">
-                <input type="text" v-model="valueToUpdate" />
-                <button class="cancelButton" @click="editDisplay()">Cancel</button>
-                <button class="editButton" @click="updateUser()">Edit</button>
-                <p class="updateResponse"> {{ updateResponse}} </p>
-            </div>
-        </div>
-        <div class="information">
-            <p>Promo</p>
-            <h2>{{ user.namePromo }}</h2><button v-if="penToHidden !== 'namePromo'" @click="editDisplay('namePromo')">Edit</button>
-            <div v-if="edit === 'namePromo'" class="updateValue">
-                <input type="text" v-model="valueToUpdate" />
-                <button class="cancelButton" @click="editDisplay()">Cancel</button>
-                <button class="editButton" @click="updateUser()">Edit</button>
-                <p class="updateResponse"> {{ updateResponse}} </p>
-            </div>
-        </div>
-    </div>
+                </div>
+            </td>
+        </tr>
+        <tr class="text-left">
+            <td>Last Name</td>
+            <td> {{user.lastName }}</td>
+            <td>
+                <button v-if="penToHidden !== 'lastName'" @click="editDisplay('lastName')"><v-icon>mdi-account-edit</v-icon></button>
+                <div v-if="edit === 'lastName'" class="updateValue">
+                    <v-text-field
+                        v-model="valueToUpdate"
+                        label="Last Name"
+                        shaped
+                    />
+                    <button class="cancelButton" @click="editDisplay()"><v-icon>mdi-cancel</v-icon></button>
+                    <button class="editButton" @click="updateUser()"><v-icon>mdi-shaker</v-icon></button>
+                    <p class="updateResponse"> {{ updateResponse}} </p>
+                </div>
+            </td>
+        </tr>
+        <tr class="text-left">
+            <td>Mail</td>
+            <td> {{ user.mail }}</td>
+            <td>
+                <button v-if="penToHidden !== 'mail'" @click="editDisplay('mail')"><v-icon>mdi-account-edit</v-icon></button>
+                <div v-if="edit === 'mail'" class="updateValue">
+                    <v-text-field
+                        v-model="valueToUpdate"
+                        label="Mail"
+                        shaped
+                    />
+                    <button class="cancelButton" @click="editDisplay()"><v-icon>mdi-cancel</v-icon></button>
+                    <button class="editButton" @click="updateUser()"><v-icon>mdi-shaker</v-icon></button>
+                    <p class="updateResponse"> {{ updateResponse}} </p>
+                </div>
+            </td>
+        </tr>
+        <tr class="text-left">
+            <td>Address</td>
+            <td> {{ user.address }}</td>
+            <td>
+                <button v-if="penToHidden !== 'address'" @click="editDisplay('address')"><v-icon>mdi-account-edit</v-icon></button>
+                <div v-if="edit === 'address'" class="updateValue">
+                    <v-text-field
+                        v-model="valueToUpdate"
+                        label="Address"
+                        shaped
+                    />
+                    <button class="cancelButton" @click="editDisplay()"><v-icon>mdi-cancel</v-icon></button>
+                    <button class="editButton" @click="updateUser()"><v-icon>mdi-shaker</v-icon></button>
+                    <p class="updateResponse"> {{ updateResponse}} </p>
+                </div>
+            </td>
+        </tr>
+        <tr class="text-left">
+            <td>Postal code</td>
+            <td> {{ user.addressCP }}</td>
+            <td>
+                <button v-if="penToHidden !== 'addressCP'" @click="editDisplay('addressCP')"><v-icon>mdi-account-edit</v-icon></button>
+                <div v-if="edit === 'addressCP'" class="updateValue">
+                    <v-text-field
+                        v-model="valueToUpdate"
+                        label="Postal Code"
+                        shaped
+                    />
+                    <button class="cancelButton" @click="editDisplay()"><v-icon>mdi-cancel</v-icon></button>
+                    <button class="editButton" @click="updateUser()"><v-icon>mdi-shaker</v-icon></button>
+                    <p class="updateResponse"> {{ updateResponse}} </p>
+                </div>
+            </td>
+        </tr>
+        <tr class="text-left">
+            <td>Pole emploi</td>
+            <td> {{ user.poleEmploiNumber }}</td>
+            <td>
+                <button v-if="penToHidden !== 'poleEmploiNumber'" @click="editDisplay('poleEmploiNumber')"><v-icon>mdi-account-edit</v-icon></button>
+                <div v-if="edit === 'poleEmploiNumber'" class="updateValue">
+                    <v-text-field
+                        v-model="valueToUpdate"
+                        label="Pole Emploi Number"
+                        shaped
+                    />
+                    <button class="cancelButton" @click="editDisplay()"><v-icon>mdi-cancel</v-icon></button>
+                    <button class="editButton" @click="updateUser()"><v-icon>mdi-shaker</v-icon></button>
+                    <p class="updateResponse"> {{ updateResponse}} </p>
+                </div>
+            </td>
+        </tr>
+        <tr class="text-left">
+            <td>Mobile Number</td>
+            <td>{{ user.mobileNumber }}</td>
+            <td>
+                <button v-if="penToHidden !== 'mobileNumber'" @click="editDisplay('mobileNumber')"><v-icon>mdi-account-edit</v-icon></button>
+                <div v-if="edit ==='mobileNumber'" class="updateValue">
+                    <v-text-field
+                        v-model="valueToUpdate"
+                        label="Mobile Number"
+                        shaped
+                    />
+                    <button class="cancelButton" @click="editDisplay()"><v-icon>mdi-cancel</v-icon></button>
+                    <button class="editButton" @click="updateUser()"><v-icon>mdi-shaker</v-icon></button>
+                    <p class="updateResponse"> {{ updateResponse}} </p>
+                </div>
+            </td>
+        </tr>
+        <tr class="text-left">
+            <td>Promotion</td>
+            <td>{{ user.namePromo }}</td>
+            <td>
+                <button v-if="penToHidden !== 'namePromo'" @click="editDisplay('namePromo')"><v-icon>mdi-account-edit</v-icon></button>
+                <div v-if="edit === 'namePromo'" class="updateValue">
+                    <!-- Promos -->
+                    <v-select
+                        v-model="valueToUpdate"
+                        :rules="getPromotionsNames(promos)"
+                        :items="promotions"
+                        label="Promotion"
+                    />
+                    <button class="cancelButton" @click="editDisplay()"><v-icon>mdi-cancel</v-icon></button>
+                    <button class="editButton" @click="updateUser()"><v-icon>mdi-shaker</v-icon></button>
+                    <p class="updateResponse"> {{ updateResponse}} </p>
+                </div>
+            </td>
+        </tr>
+      </tbody>
+    </template>
+  </v-simple-table>
+</div>
 </template>
 
 <script>
@@ -88,7 +160,7 @@
         updateMember
     } from "../../services/api/member";
     export default {
-        props: ["user"],
+        props: ["user", "promos"],
         data() {
             return {
                 title: 'Update User',
@@ -103,6 +175,7 @@
                     firstName: "",
                     lastName: "",
                 },
+                promotions:[]
             }
         },
         methods: {
@@ -122,50 +195,25 @@
                 this.paramsToUpdate = object;
                 this.edit = object;
                 this.penToHidden = object
+            },
+            getPromotionsNames(promos)
+            {
+                for(const promo of promos)
+                {
+                    if(this.promotions.includes(promo.name))
+                        break;
+                    else
+                        this.promotions.push(promo.name);
+                }
             }
         }
     }
+
 </script>
 
 <style scoped>
-    #updateUser {
-        max-height: 880px;
-        overflow: scroll;
-        text-align: start;
-        margin: 5% 0 0 17%;
-    }
-    .information {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        border-bottom: 1px grey solid;
-        width: 30%;
-    }
-    .information>button {
-        align-self: end;
-        margin-right: 5%;
-        font-size: 1.2em;
-        color: green;
-    }
-    .cancelButton {
-        color: red
-    }
-    .editButton {
-        color: green;
-    }
-    input {
-        width: 60%;
-        margin-bottom: 20px;
-    }
-    h2,
-    p {
-        margin: 1% 0 1% 5%;
-    }
-    .updateResponse {
-        background-color: #56bd56;
-        color: #003800;
-        padding: 1.5%;
-        display: inline-block;
-        border-radius: 10px;
-    }
+.tableEditor{
+    width: 80%;
+    margin-left: 10%;
+}
 </style>
