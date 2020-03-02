@@ -6,7 +6,10 @@
         elevate-on-scroll
         scroll-target="#scrolling-techniques-7"
       >
-        <v-toolbar-title>Time Card</v-toolbar-title>
+        <div max-width="10%" max-height="100%">
+            <v-img src="../assets/logo.png"></v-img>
+        </div>
+
         <v-spacer></v-spacer>
         <div v-if="user.role">
 
@@ -43,6 +46,7 @@
                 Logout
             </v-btn>
         </div>
+        <div else></div>
       </v-app-bar>
 
 </template>
@@ -60,3 +64,6 @@
         }
     }
 </script>
+
+<style scoped>
+</style>
