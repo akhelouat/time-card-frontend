@@ -2,7 +2,7 @@
     <div id="Manager">
         <AsideManager :promos="promos" :users="users" v-on:newUserCreator="getNewUserCreator" v-on:newPromoCreator="getNewPromoCreator" v-on:userSelector="getSelectedUser" />    
         <transition v-if="selectedUser" name="slide-fade">
-            <UserUpdater :user="selectedUser" v-on:userCanceled="getSelectedUser" />
+            <UserUpdater :promos="promos" :user="selectedUser" v-on:userCanceled="getSelectedUser" />
         </transition>
         <transition name="slide-fade">
             <UserCreator v-if="newUser" :users="users" :promos="promos" />
