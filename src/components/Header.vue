@@ -1,24 +1,50 @@
 <template>
-    <header class="menu">
-        <nav>
-            <div class="logo-container">
-                <router-link :to="{name: 'login'}">
-                    <img src="../assets/logo.png" alt="This is the OpenHackademy logo in the navigation menu">
-                </router-link>
-            </div>
-            <div class="links" v-if="user.role === false">
-                <router-link :to="{name: 'check'}">Check</router-link>
-                <router-link :to="{name: 'psheet'}">Precense sheet</router-link>
-                <router-link :to="{name: 'newpass'}">Change Password</router-link>
-            </div>
-            <div class="links" v-else>
-                <router-link :to="{name: 'adminhome'}">Home</router-link>
-                <router-link :to="{name: 'manager'}">Manager</router-link>
-                <router-link :to="{name: 'newpass'}">Change Password</router-link>
-                <router-link :to="{name: 'login'}">Logout</router-link>
-            </div>
-        </nav>
-    </header>
+
+      <v-app-bar
+        fixed
+        dark
+        elevate-on-scroll
+        scroll-target="#scrolling-techniques-7"
+      >
+        <v-toolbar-title>Time Card</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <div v-if="user.role">
+
+            <v-btn link :to="{name: 'adminhome'}">
+                Home
+            </v-btn>
+
+            <v-btn link :to="{name: 'manager'}">
+                Manager
+            </v-btn>
+
+            <v-btn link :to="{name: 'newpass'}">
+                Change password
+            </v-btn>
+
+            <v-btn link :to="{name: 'login'}">
+                Logout
+            </v-btn>
+        </div>
+        <div v-if="user.role === false">
+            <v-btn link :to="{name: 'check'}">
+                Check Presence
+            </v-btn>
+
+            <v-btn link :to="{name: 'psheet'}">
+                Presence Sheet
+            </v-btn>
+
+            <v-btn link :to="{name: 'newpass'}">
+                Change password
+            </v-btn>
+
+            <v-btn link :to="{name: 'login'}">
+                Logout
+            </v-btn>
+        </div>
+      </v-app-bar>
+
 </template>
 
 <script>
@@ -34,31 +60,3 @@
         }
     }
 </script>
-
-<style scoped>
-    .menu {
-        background-color: #313131;
-        width: 100%;
-        height: 60px;
-        position: fixed;
-        top: 0;
-        left: 0;
-    }
-    nav {
-        display: flex;
-        height: 100%;
-    }
-    .links{
-        width: 80%;
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-    }
-    img {
-        width: 200px;
-    }
-    a {
-        color: #fafafa;
-        text-decoration: none;
-    }
-</style>
