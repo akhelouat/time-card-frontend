@@ -18,8 +18,8 @@
     <v-select v-model="user.namePromo" :rules="getPromotionsNames(promos)" :items="promotions" label="Promo" required />
     <v-checkbox v-model="checkbox" :rules="[v => !!v || 'You must agree to continue!']" label="Do you agree?" required />
     <v-btn :disabled="!valid" color="success" class="mr-4" @click="createMember(user)">Validate</v-btn>
-    <v-btn color="error" class="mr-4" @click="reset">Reset Form</v-btn>
-    <v-btn color="warning" @click="test()">Reset Validation</v-btn>
+    <v-btn color="warning" class="mr-4" @click="reset">Reset Form</v-btn>
+    <v-btn color="error">Cancel Edition</v-btn>
   </v-form>
 </template>
 
@@ -57,21 +57,6 @@
     },
 
     methods: {
-      test() {
-        for (const promo of this.promos) {
-          if (this.user.namePromo.includes(promo.name)) {
-            const start = moment(promo.start);
-            const end = moment(promo.end);
-            const total = end.diff(start, 'days');
-            for (let i = 0; i < total; i++) {
-              this.user.presence.push({"date":null, "check":-1, "hour":null});
-            }
-            break;
-          }
-        }
-        console.log(this.user.presence)
-        console.log(moment())
-      },
       validate() {
         if (this.$refs.form.validate()) {
           this.snackbar = true;
