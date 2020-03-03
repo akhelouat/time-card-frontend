@@ -8,10 +8,11 @@ import PSheet from './components/PSheet.vue'
 import AdminHomePage from './components/AdminHomePage'
 import StatPromo from './components/StatPromo'
 import Manager from './components/Manager'
+import store from './store';
 
 Vue.use(Router)
 
-export default new Router({
+const router =  new Router({
     mode: 'history',
     routes: [{
             path: '/',
@@ -63,3 +64,20 @@ export default new Router({
         }
     ]
 })
+
+
+router.beforeEach((to, from, next) => {
+    if(to.name === 'login') {
+      return next()
+        
+    }
+    if (store.state.user.logged) {
+        next();
+    }
+    else
+    next({
+        name: 'login'
+    });
+  })
+
+export default router

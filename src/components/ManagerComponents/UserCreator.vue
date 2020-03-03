@@ -25,6 +25,7 @@
 
 <script>
   const moment = require('moment')
+  import {nameRules, emailRules} from '../../services/formValidation' ;
   import {
     addMember
   } from "../../services/api/member";
@@ -43,18 +44,12 @@
         namePromo: "",
         presence: []
       },
+      nameRules,
+      emailRules,
       promotions: [],
       select: null,
       checkbox: false
     }),
-    computed: {
-      nameRules() {
-        return this.$store.state.nameRules
-      },
-      emailRules() {
-        return this.$store.state.emailRules
-      }
-    },
 
     methods: {
       validate() {

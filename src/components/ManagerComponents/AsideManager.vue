@@ -68,6 +68,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
   export default {
     props: ["promos", "users"],
     data() {
@@ -85,9 +86,9 @@
       };
     },
     computed: {
-      loggedUserInfo() {
-        return this.$store.state.defaultState.user
-      }
+      ...mapState({
+        loggedUserInfo: "user"
+      })
     },
     methods: {
       // Get selected promo name and add to the selectedPromo data string
