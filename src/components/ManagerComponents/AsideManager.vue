@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer permanent expand-on-hover dark>
+  <v-navigation-drawer dark permanent expand-on-hover>
     <v-list>
       <!-- Admin Avatar :) -->
       <v-list-item class="px-2">
@@ -17,45 +17,46 @@
     </v-list>
 
     <!-- New User -->
-    <v-divider></v-divider>
     <v-list nav dense>
-    <v-list-item-title>Manage</v-list-item-title>
       <v-divider></v-divider>
+      <!-- Title Manage -->
+      <v-list-item-title class="secondary">
+        <!-- Icon manage -->
+        <v-icon class="success--text">mdi-plus-thick</v-icon>
+        Manage
+      </v-list-item-title>
+      <v-divider></v-divider>
+      <!-- New user -->
       <v-list-item link @click="emitNewUserCreator()">
-        <v-list-item-icon>
-          <v-icon>mdi-plus-thick</v-icon>
-        </v-list-item-icon>
         <v-list-item-title>New User</v-list-item-title>
       </v-list-item>
 
       <!-- New promo -->
       <v-list-item link @click="emitNewPromoCreator()">
-        <v-list-item-icon>
-          <v-icon>mdi-plus-thick</v-icon>
-        </v-list-item-icon>
         <v-list-item-title>New Promo</v-list-item-title>
       </v-list-item>
 
       <!-- Promos -->
       <v-divider></v-divider>
-      <v-list-item-title>Promos</v-list-item-title>
+      <v-list-item-title class="secondary">
+        <v-icon class="blue--text darken-4">mdi-account-group</v-icon>
+        Promos
+      </v-list-item-title>
       <v-divider></v-divider>
       <v-list-item link v-for="promotion in promos" :key="promotion.name" @click="getSelectedPromo(promotion.name)">
-        <v-list-item-icon>
-          <v-icon>mdi-account-group</v-icon>
-        </v-list-item-icon>
         <v-list-item-title>{{ promotion.name }}</v-list-item-title>
       </v-list-item>
 
       <!-- Users -->
       <v-divider></v-divider>
-      <div v-if="selectedPromo">{{ selectedPromo }} Students</div>
+      <v-list-item-title class="secondary" v-if="selectedPromo">
+        <v-icon class="teal--text">mdi-account</v-icon>
+        {{selectedPromo}}
+      </v-list-item-title>
+      
       <v-divider></v-divider>
       <div v-for="user in users" :key="user.firstName">
         <v-list-item link v-if="user.namePromo === selectedPromo" @click="getSelectedUser(user), emitSelectedUser()">
-          <v-list-item-icon>
-            <v-icon>mdi-account</v-icon>
-          </v-list-item-icon>
           <v-list-item-title>{{ user.firstName + ' ' + user.lastName }}</v-list-item-title>
         </v-list-item>
       </div>
