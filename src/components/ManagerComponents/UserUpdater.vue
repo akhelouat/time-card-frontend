@@ -1,6 +1,5 @@
 <template>
 <div>
-<button class="error" @click="deleteSelectedUser"><v-icon>mdi-cancel</v-icon> Cancel edition</button>
   <v-simple-table class="tableEditor">
     <template v-slot:default>
       <thead>
@@ -152,6 +151,7 @@
       </tbody>
     </template>
   </v-simple-table>
+  <v-btn color="#c61e42" class="white--text" @click="deleteSelectedUser"><v-icon>mdi-cancel</v-icon> Cancel edition</v-btn>
 </div>
 </template>
 

@@ -1,6 +1,6 @@
 
 <template>
-    <div>
+    <div class="mt-10">
         <v-calendar :attributes='attrs' color="red" is-dark is-inline @dayclick='dayClicked'>
         </v-calendar>
         {{ selectedDay }}
