@@ -10,8 +10,8 @@
       <!-- Admin info -->
       <v-list-item link>
         <v-list-item-content>
-          <v-list-item-title class="title">Admin</v-list-item-title>
-          <v-list-item-subtitle>mdr@lol.com</v-list-item-subtitle>
+          <v-list-item-title class="title">{{loggedUserInfo.firstName + ' ' + loggedUserInfo.lastName }}</v-list-item-title>
+          <v-list-item-subtitle>{{loggedUserInfo.mail}}</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -80,6 +80,11 @@
           }
         ]
       };
+    },
+    computed: {
+      loggedUserInfo() {
+        return this.$store.state.defaultState.user
+      }
     },
     methods: {
       // Get selected promo name and add to the selectedPromo data string
