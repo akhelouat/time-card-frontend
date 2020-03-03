@@ -7,10 +7,9 @@
         elevate-on-scroll
         scroll-target="#scrolling-techniques-7"
       >
-        <div max-width="10%" max-height="100%">
-            <v-img src="../assets/logo.png"></v-img>
-        </div>
-
+        <v-toolbar-title>
+          <v-img width="10em" src="../assets/logo.png"/>
+        </v-toolbar-title>
         <v-spacer></v-spacer>
         <!-- Admin menu -->
         <div v-if="user.role">
