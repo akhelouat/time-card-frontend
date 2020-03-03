@@ -16,6 +16,7 @@ const mutations = {
       firstName: member.firstName,
       lastName: member.lastName,
       isAdmin: member.isAdmin,
+      mail: member.mail,
       namePromo: member.namePromo
     }
   }
