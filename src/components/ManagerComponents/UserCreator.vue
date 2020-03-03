@@ -44,17 +44,18 @@
         presence: []
       },
       promotions: [],
-      nameRules: [
-        v => !!v || "Name is required",
-        v => (v && v.length <= 10) || "Name must be less than 10 characters"
-      ],
-      emailRules: [
-        v => !!v || "E-mail is required",
-        v => /.+@.+\..+/.test(v) || "E-mail must be valid"
-      ],
       select: null,
       checkbox: false
     }),
+    computed: {
+      nameRules() {
+        return this.$store.state.nameRules
+      },
+      emailRules() {
+        return this.$store.state.emailRules
+      }
+    },
+
     methods: {
       test() {
         for (const promo of this.promos) {

@@ -6,8 +6,7 @@
           <v-flex xs12 sm8 md4>
             <v-card class="elevation-12">
               <v-toolbar color="#c61e42" flat>
-                <v-toolbar-title 
-                class="white--text">Login</v-toolbar-title>
+                <v-toolbar-title class="white--text">Login</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
                 <v-form>
@@ -17,7 +16,7 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn class="white--text" color="#c61e42" @click="getLoggedMember()">Login</v-btn>
+                <v-btn class="white--text" color="#c61e42" @click=" logMember()">login</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -36,15 +35,18 @@
       return {
         user: {
           username: "",
-          password: "",
+          password: ""
         },
         error: ""
       }
     },
     methods: {
-      getLoggedMember() {
+      logMember() {
         login(this.user.username, this.user.password)
-      }
+          .then(member => {
+            this.$store.commit('logUser', member);
+          })
+      },
     }
   }
 </script>
