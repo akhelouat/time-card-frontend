@@ -1,8 +1,17 @@
 <template>
-  <v-navigation-drawer dark permanent expand-on-hover>
-    <v-list class="mt-12">
+  <v-navigation-drawer dark permanent expand-on-hover absolute>
+    <v-list>
+      
+      <v-divider></v-divider>
+      <v-list-item-title class="secondary">
+        <!-- Icon manage -->
+        <v-icon class="purple--text">mdi-account-box</v-icon>
+        My profil
+      </v-list-item-title>
+      <v-divider></v-divider>
+
       <!-- Admin info -->
-      <v-list-item link>
+      <v-list-item link :to="{name: 'newpass'}">
         <v-list-item-content>
           <v-list-item-title class="title">{{loggedUserInfo.firstName + ' ' + loggedUserInfo.lastName }}</v-list-item-title>
           <v-list-item-subtitle>{{loggedUserInfo.mail}}</v-list-item-subtitle>
@@ -10,16 +19,16 @@
       </v-list-item>
     </v-list>
 
-    <!-- New User -->
-    <v-list nav dense>
-      <v-divider></v-divider>
+    <v-divider></v-divider>
       <!-- Title Manage -->
-      <v-list-item-title class="secondary">
+    <v-list-item-title class="secondary white--text">
         <!-- Icon manage -->
         <v-icon class="success--text">mdi-plus-thick</v-icon>
         Manage
-      </v-list-item-title>
-      <v-divider></v-divider>
+    </v-list-item-title>
+    <v-divider></v-divider>
+
+    <v-list nav dense>
       <!-- New user -->
       <v-list-item link @click="emitNewUserCreator()">
         <v-list-item-title>New User</v-list-item-title>
@@ -47,8 +56,8 @@
         <v-icon class="teal--text">mdi-account</v-icon>
         {{selectedPromo}}
       </v-list-item-title>
-      
       <v-divider></v-divider>
+      
       <div v-for="user in users" :key="user.firstName">
         <v-list-item link v-if="user.namePromo === selectedPromo" @click="getSelectedUser(user), emitSelectedUser()">
           <v-list-item-title>{{ user.firstName + ' ' + user.lastName }}</v-list-item-title>
@@ -112,9 +121,3 @@
     }
   };
 </script>
-
-<style scoped>
-  aside {
-    position: fixed;
-  }
-</style>
