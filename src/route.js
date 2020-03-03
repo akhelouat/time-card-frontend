@@ -8,15 +8,27 @@ import PSheet from './components/PSheet.vue'
 import AdminHomePage from './components/AdminHomePage'
 import StatPromo from './components/StatPromo'
 import Manager from './components/Manager'
+import LoginValidate from './components/LoginValidate'
 
 Vue.use(Router)
 
-export default new Router({
+
+
+/*let adminRedirection = '/present';
+if (this.$store.state.isAdmin === true){
+    adminRedirection = '/admin/manage'
+}*/
+const router =  new Router({
     mode: 'history',
     routes: [{
             path: '/',
             name: 'login',
             component: Login
+        },
+        {
+            path: '/LoginValidate',
+            name: 'LoginValidate',
+            component: LoginValidate,
         },
         //student path
         {
@@ -63,3 +75,10 @@ export default new Router({
         }
     ]
 })
+const test = 10;
+router.beforeEach((to, from, next) => {
+    if (test > 0) next('/login')
+    else next()
+  });
+
+export default router;
