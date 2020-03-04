@@ -5,14 +5,14 @@
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <!-- Admin menu -->
-        <div v-if="user.role">
+        <div v-if="user.isAdmin === true">
             <v-btn link color="#c61e42" class="white--text" :to="{name: 'adminhome'}">Home</v-btn>
             <v-btn link color="#c61e42" class="white--text" :to="{name: 'manager'}">Manager</v-btn>
             <v-btn link color="#c61e42" class="white--text" :to="{name: 'newpass'}">Change password</v-btn>
             <v-btn link color="#c61e42" class="white--text" :to="{name: 'login'}">Logout</v-btn>
         </div>
         <!-- Student menu -->
-        <div v-if="user.role === false">
+        <div v-if="user.isAdmin === false">
             <v-btn color="#c61e42" class="white--text" link :to="{name: 'check'}">Check Presence</v-btn>
             <v-btn link color="#c61e42" class="white--text" :to="{name: 'psheet'}">Presence Sheet</v-btn>
             <v-btn link color="#c61e42" class="white--text" :to="{name: 'newpass'}">Change password</v-btn>
@@ -23,15 +23,10 @@
 </template>
 
 <script>
+    import { mapState } from "vuex";
     export default {
-        data: () => {
-            return {
-                user: {
-                    name: 'steph',
-                    password: '1234',
-                    role: true
-                }
-            };
+        computed: {
+            ...mapState(['user'])
         }
     }
 </script>

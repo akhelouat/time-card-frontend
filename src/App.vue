@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <Header/>
-    <router-view/>
+    <router-view :isAdmin="isAdmin"/>
     <Footer/>
   </v-app>
 </template>
@@ -14,6 +14,11 @@
     components: {
       Header,
       Footer
+    },
+    data(){
+      return {
+        isAdmin: false
+      }
     }
   }
 </script>

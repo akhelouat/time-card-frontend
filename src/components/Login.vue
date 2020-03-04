@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <v-content>
+    <v-content v-if="isLogged === false">
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
           <v-flex xs12 sm8 md4>
@@ -23,6 +23,10 @@
         </v-layout>
       </v-container>
     </v-content>
+    <v-container class="success" v-else>
+      <h1 class="white--text">Success</h1>
+      <p class="white--text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit vitae beatae, quod reprehenderit voluptate veritatis aliquid quisquam cum repudiandae asperiores exercitationem fugiat qui nemo quidem laborum quasi. Sunt, temporibus cum!</p>
+    </v-container>
   </div>
 </template>
 
@@ -37,6 +41,7 @@
           username: "",
           password: ""
         },
+        isLogged:false,
         error: ""
       }
     },
@@ -45,6 +50,7 @@
         login(this.user.username, this.user.password)
           .then(member => {
             this.$store.commit('logUser', member);
+            this.isLogged = true;
           })
       },
     }
