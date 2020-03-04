@@ -16,7 +16,7 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn class="white--text" color="#c61e42" @click=" logMember()">login</v-btn>
+                <v-btn  class="white--text" color="#c61e42" @click=" logMember()">login</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -50,7 +50,12 @@
         login(this.user.username, this.user.password)
           .then(member => {
             this.$store.commit('logUser', member);
-            this.isLogged = true;
+         if (member.isAdmin === false) {
+              this.$router.push({ name: 'check'});
+            }
+            else {
+            this.$router.push({ name: 'statpromo'});
+            }
           })
       },
     }
