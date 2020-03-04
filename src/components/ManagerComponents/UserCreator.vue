@@ -25,7 +25,10 @@
 
 <script>
   const moment = require('moment')
-  import {nameRules, emailRules} from '../../services/formValidation' ;
+  import {
+    nameRules,
+    emailRules
+  } from '../../services/formValidation';
   import {
     addMember
   } from "../../services/api/member";
@@ -48,9 +51,8 @@
       emailRules,
       promotions: [],
       select: null,
-      checkbox: false
+      checkbox: false,
     }),
-
     methods: {
       validate() {
         if (this.$refs.form.validate()) {
@@ -65,16 +67,27 @@
       },
       fillPresence() {
         console.log('dedans')
-        
       },
       createMember(user) {
         for (const promo of this.promos) {
           if (this.user.namePromo.includes(promo.name)) {
-            const start = moment(promo.start);
-            const end = moment(promo.end);
-            const total = end.diff(start, 'days');
+            let startDate = moment(promo.start);
+            let endDate = moment(promo.end);
+            let dateCount = moment(promo.start);
+            let total = endDate.diff(startDate, 'days');
             for (let i = 0; i < total; i++) {
-              this.user.presence.push({"date":null, "check":-1, "hour":null});
+              if (dateCount.day() === 5 || dateCount.day() === 6) {
+                this.user.presence.push({
+                  "date": moment(dateCount),
+                  "check": 2
+                });
+              } else {
+                this.user.presence.push({
+                  "date": moment(dateCount),
+                  "check": -1
+                });
+              }
+              dateCount = moment(dateCount).add(1, 'd');
             }
             break;
           }
