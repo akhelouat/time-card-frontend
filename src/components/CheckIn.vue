@@ -5,13 +5,36 @@
  * @ Modified time: 2020-02-27 16:36:04
  * @ Description:
  -->
- 
 
 <template>
-    <div>
-        <h3>We are : <span> {{ createdAtDisplay }}</span></h3>
-        <button @click="checkForm">benjam?</button>
-        <p v-if="send"> {{send}}</p>
+    <div id="app">
+        <v-content>
+            <v-container fluid fill-height>
+                <v-layout align-center justify-center>
+                    <v-flex xs12 sm8 md4>
+                        <v-card class="elevation-12">
+                            <v-toolbar color="#c61e42" flat>
+                                <v-toolbar-title class="white--text">Send my Presence</v-toolbar-title>
+                            </v-toolbar>
+                            <v-card-text>
+                                <v-toolbar-title>Hello {{ capitalizeFirst(loggedUserInfo.firstName)}} !</v-toolbar-title>
+                                <v-spacer></v-spacer>
+                                <v-toolbar-title>Date: {{ getDate }}</v-toolbar-title>
+                                <v-spacer></v-spacer>
+                                <v-toolbar-title>Time: {{ getHour }}</v-toolbar-title>
+                                <v-spacer></v-spacer>
+                                <v-form class="d-flex flex-column justify-center">
+                                    <v-checkbox v-model="checkBox" label="I am present!"></v-checkbox>
+                                    <v-btn v-if="checkBox" left class="success white--text">Validate</v-btn>
+                                    <v-btn v-else disabled class="white--text">Validate</v-btn>
+                                    <v-spacer></v-spacer>
+                                </v-form>
+                            </v-card-text>
+                        </v-card>
+                    </v-flex>
+                </v-layout>
+            </v-container>
+        </v-content>
     </div>
 </template>
 
@@ -28,7 +51,8 @@
             return {
                 send: null,
                 member: [],
-                error: ''
+                error: '',
+                checkBox: false
             };
         },
         computed: {
@@ -38,6 +62,12 @@
             createdAtDisplay() {
                 return moment().format('YYYY-MM-DD HH:mm');
             },
+            getDate() {
+                return moment().format("MMMM Do YYYY");
+            },
+            getHour() {
+                return moment().format("HH:mm:ss");
+            }
         },
         methods: {
             checkForm: function(e) {
@@ -90,11 +120,10 @@
                 } else {
                     return 2;
                 }
+            },
+            capitalizeFirst(string) {
+                return string.charAt(0).toUpperCase() + string.slice(1);
             }
         },
     };
 </script>
-
-<style>
-
-</style>
