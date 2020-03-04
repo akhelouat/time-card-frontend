@@ -12,6 +12,7 @@ const mutations = {
   logUser(state, member) {
     state.user = {
       logged: true,
+      _id: member._id,
       username: member.username,
       firstName: member.firstName,
       lastName: member.lastName,
