@@ -9,15 +9,17 @@
 
 <template>
     <div>
-            <h3>We are : <span> {{ createdAtDisplay }}</span></h3>
-            <button @click="checkForm">benjam?</button>
+        <h3>We are : <span> {{ createdAtDisplay }}</span></h3>
+        <button @click="checkForm">benjam?</button>
         <p v-if="send"> {{send}}</p>
     </div>
 </template>
 
 <script>
     import {
-        getOneMember,
+        mapState
+    } from "vuex";
+    import {
         updateMember
     } from "../services/api/member"
     const moment = require('moment')
@@ -30,6 +32,9 @@
             };
         },
         computed: {
+            ...mapState({
+                loggedUserInfo: "user"
+            }),
             createdAtDisplay() {
                 return moment().format('YYYY-MM-DD HH:mm');
             },
@@ -55,8 +60,8 @@
                 e.preventDefault();
             },
             checkSign: function() {
-                this.member.presence[0]=2
-                if (this.member.presence[0]===2) {
+                this.member.presence[0] = 2
+                if (this.member.presence[0] === 2) {
                     console.log('inin')
                     this.member.presence[0].push(this.checkTime())
                     console.log(this.member.presence[0])
@@ -87,16 +92,6 @@
                 }
             }
         },
-        created() {
-            console.log('cr')
-            getOneMember("5e579b5150458e2465029b09")
-                .then(member => {
-                    this.member = member;
-                })
-                .catch(error => {
-                    this.error = error;
-                });
-        }
     };
 </script>
 
