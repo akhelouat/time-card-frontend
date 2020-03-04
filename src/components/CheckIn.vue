@@ -17,7 +17,6 @@
 
 <script>
     import {
-        getOneMember,
         updateMember
     } from "../services/api/member"
     const moment = require('moment')
@@ -87,16 +86,6 @@
                 }
             }
         },
-        created() {
-            console.log('cr')
-            getOneMember("5e579b5150458e2465029b09")
-                .then(member => {
-                    this.member = member;
-                })
-                .catch(error => {
-                    this.error = error;
-                });
-        }
     };
 </script>
 
