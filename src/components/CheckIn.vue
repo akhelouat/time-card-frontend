@@ -25,8 +25,8 @@
                                 <v-spacer></v-spacer>
                                 <v-form class="d-flex flex-column justify-center">
                                     <v-checkbox v-model="checkBox" label="I am present!"></v-checkbox>
-                                    <v-btn v-if="checkBox" left class="success white--text">Validate</v-btn>
-                                    <v-btn v-else disabled class="white--text">Validate</v-btn>
+                                    <v-btn v-if="checkBox" left class="success white--text" @click="toSign()">Validate</v-btn>
+                                    <v-btn v-else disabled class="white--text" >Validate</v-btn>
                                     <v-spacer></v-spacer>
                                 </v-form>
                             </v-card-text>
@@ -103,6 +103,15 @@
                 } else {
                     this.send = 'already registred';
                 }
+            },
+            toSign() {
+            const nowDate = moment()
+            const nowDateIndex = nowDate.diff(this.loggedUserInfo.presence[0].date, 'days');
+            let updatedPresence = this.loggedUserInfo.presence
+            updatedPresence[nowDateIndex].check = 0
+             updateMember(this.loggedUserInfo._id, 'presence', updatedPresence)
+             .then(() => 'the check is done')
+             .catch(() => 'ERROR : the check is not done')
             },
             changeDate() {
                 getOneMember(this.loggedUserInfo._id)
