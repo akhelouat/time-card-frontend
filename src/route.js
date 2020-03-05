@@ -5,14 +5,14 @@ import Login from './components/Login.vue'
 import Pre from './components/Present.vue'
 import NewPass from './components/NewPass.vue'
 import PSheet from './components/PSheet.vue'
-import AdminHomePage from './components/AdminHomePage'
+import AdminHomePage from './components/crashTest/AdminHomePage'
 import StatPromo from './components/StatPromo'
 import Manager from './components/Manager'
 import store from './store';
 
 Vue.use(Router)
 
-const router =  new Router({
+const router = new Router({
     mode: 'history',
     routes: [{
             path: '/',
@@ -67,17 +67,16 @@ const router =  new Router({
 
 
 router.beforeEach((to, from, next) => {
-    if(to.name === 'login') {
-      return next()
-        
+    if (to.name === 'login') {
+        return next()
+
     }
     if (store.state.user.logged) {
         next();
-    }
-    else
-    next({
-        name: 'login'
-    });
-  })
+    } else
+        next({
+            name: 'login'
+        });
+})
 
 export default router
