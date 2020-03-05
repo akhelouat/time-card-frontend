@@ -2,7 +2,7 @@
  * @ Author: Rahil Felix
  * @ Create Time: 5050-02-21 11:25:22
  * @ Modified by: Rahil Felix
- * @ Modified time: 2020-03-04 09:38:19
+ * @ Modified time: 2020-03-05 15:29:41
  * @ Description:
  -->
 
@@ -10,7 +10,7 @@
 
 <div>
     <v-select v-model="promo" :rules="getPromotionsNames(promos)" :items="promotions" label="Promo" />
-    <div v-if="members.length" :rules="resetAllStat()">
+    <div v-if="members.length">
         <v-lazy
           :options="{
             threshold: .5
@@ -66,14 +66,14 @@
                     <td>
                       <v-btn>
                         <v-icon class="warning--text">mdi-flag</v-icon>
-                        6
+                        {{orangeFlag}}
                       </v-btn>
                     </td>
 
                     <td>
                       <v-btn>
                         <v-icon class="error--text">mdi-flag</v-icon>
-                        24
+                        {{redFlag}}
                       </v-btn>
                     </td>
                   </tr>
@@ -106,12 +106,6 @@
         nbrLate: [],
         nbrInTime: [],
         nbrDay: 0,
-        nbrAll: {
-          "allAbs": 0,
-          "allLate": 0,
-          "allInTime": 0,
-          "allDay": 0
-        }
       };
     },
     methods: {
@@ -147,16 +141,6 @@
             this.nbrAbs.push(presence[checkDay].date);
           }
         }
-        this.nbrAll.allAbs += this.nbrAbs.length;
-        this.nbrAll.allLate += this.nbrLate.length;
-        this.nbrAll.allInTime += this.nbrInTime.length;
-        this.nbrAll.allDay += this.nbrDay;
-      },
-      resetAllStat() {
-        this.nbrAll.allAbs = 0;
-        this.nbrAll.allLate = 0;
-        this.nbrAll.allInTime = 0;
-        this.nbrAll.allDay = 0;
       }
     },
     computed: {
@@ -178,23 +162,11 @@
         }
         return ((this.nbrInTime.length / this.nbrDay) * 100).toFixed(0)
       },
-      persentageAllAbs: function() {
-        if (this.nbrAll.allAbs === 0) {
-          return 0;
-        }
-        return ((this.nbrAll.allAbs / this.nbrAll.allDay) * 100).toFixed(0)
+      orangeFlag: function() {
+        return (Math.floor(this.nbrLate.length/3))
       },
-      persentageAllLate: function() {
-        if (this.nbrAll.allLate === 0) {
-          return 0;
-        }
-        return ((this.nbrAll.allLate / this.nbrAll.allDay) * 100).toFixed(0)
-      },
-      persentageAllInTime: function() {
-        if (this.nbrAll.allInTime === 0) {
-          return 0;
-        }
-        return ((this.nbrAll.allInTime / this.nbrAll.allDay) * 100).toFixed(0)
+      redFlag: function() {
+        return (Math.floor(this.nbrAbs.length/3))
       }
     },
     mounted() {
