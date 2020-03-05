@@ -7,30 +7,87 @@
  -->
 
 <template>
-  <div>
+
+<div>
     <v-select v-model="promo" :rules="getPromotionsNames(promos)" :items="promotions" label="Promo" />
     <div v-if="members.length" :rules="resetAllStat()">
-      <div class="d-flex flex-row mb-6" v-for="member in members" :key="member._id" >
-        <v-card width="200" height="50"> {{member.firstName}} {{member.lastName}}</v-card>
-        <v-card class="d-flex flex-row mb-6" width="100%" height="50" :rules="parseDay(member.presence)">
-          <v-card width="33%" height="50" class="green" v-if="nbrInTime.length>1">a l'heure: {{nbrInTime.length}} jours <br/>{{persentageInTime}}%</v-card>
-          <v-card width="33%" height="50" class="green" v-else>a l'heure: {{nbrInTime.length}} jour <br/>{{persentageInTime}}%</v-card>
-          <v-card width="33%" height="50" class="orange" v-if="nbrLate.length>1">en retard: {{nbrLate.length}} jours <br/>{{persentageLate}}%</v-card>
-          <v-card width="33%" height="50" class="orange" v-else>en retard: {{nbrLate.length}} jour <br/>{{persentageLate}}%</v-card>
-          <v-card width="33%" height="50" class="red" v-if="nbrAbs.length>1">absent: {{nbrAbs.length}} jours <br/>{{persentageAbs}}%</v-card>
-          <v-card width="33%" height="50" class="red" v-else>absent: {{nbrAbs.length}} jour <br/>{{persentageAbs}}%</v-card>
-        </v-card>
+        <v-lazy
+          :options="{
+            threshold: .5
+          }"
+          min-height="200"
+          transition="fade-transition"
+          class="d-flex flex-row justify-center"
+        >
+            <v-simple-table>
+              <template v-slot:default>
+                <thead>
+                  <tr>
+                    <th class="secondary white--text text-left">Surname</th>
+                    <th class="secondary white--text text-left">Name</th>
+
+                    <th class="success white--text text-left">Presence %</th>
+                    <th class="warning white--text text-left">Delay %</th>
+                    <th class="error white--text text-left">Absence %</th>
+
+                    <th class="success white--text text-left">Presence days counter</th>
+                    <th class="warning white--text text-left">Delay Days counter</th>
+                    <th class="error white--text text-left">Absence days counter</th>
+
+                    <th class="secondary white--text text-left">Retard</th>
+
+                    <th class="secondary white--text text-left">Absence</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="member in members" :key="member._id" :rules="parseDay(member.presence)">
+                    <!-- Student Name -->
+                    <td>{{ member.firstName }}</td>
+                    <td>{{ member.lastName }}</td>
+
+                    <!-- Presence days percentage -->
+                    <td>{{persentageInTime}}%</td>
+
+                    <!-- Delay days percentage -->
+                    <td>{{persentageLate}}%</td>
+
+                    <!-- Absence days percentage -->
+                    <td>{{persentageAbs}}%</td>
+
+                    <!-- Prensence days counter -->
+                    <td>{{nbrInTime.length}}</td>
+                    
+                    <!-- Delay days counter -->
+                    <td>{{nbrLate.length}}</td>
+                    
+                    <!-- Absence days counter -->
+                    <td>{{nbrAbs.length}}</td>
+
+                    <td>
+                      <v-btn>
+                        <v-icon class="warning--text">mdi-flag</v-icon>
+                        6
+                      </v-btn>
+                    </td>
+
+                    <td>
+                      <v-btn>
+                        <v-icon class="error--text">mdi-flag</v-icon>
+                        24
+                      </v-btn>
+                    </td>
+                  </tr>
+                </tbody>
+              </template>
+            </v-simple-table>
+        </v-lazy>
       </div>
-      <v-card width="100%" height="50">
-        <v-card width="33%" height="50">{{persentageAllInTime}}%</v-card>
-        <v-card width="33%" height="50">{{persentageAllLate}}%</v-card>
-        <v-card width="33%" height="50">{{persentageAllAbs}}%</v-card>
-      </v-card>
-    </div>
-  </div>
+
+</div>
 </template>
 
 <script>
+
   import {
     getPromo
   } from "../services/api/promo";
@@ -164,5 +221,96 @@
 </script>
 
 <style scoped>
+/*  
 
+  <v-app id="inspire">
+    <v-card>
+      <v-tabs
+        background-color="primary"
+        dark
+        v-model="promo" :rules="getPromotionsNames(promos)" :items="promotions"
+      >
+        <v-tab
+          v-for="promotion in promos"
+          :key="promotion.name"
+        >
+          {{ promotion.name }}
+        </v-tab>
+      </v-tabs>
+  
+      <v-tabs-items >
+        <v-lazy
+          :options="{
+            threshold: .5
+          }"
+          min-height="200"
+          transition="fade-transition"
+        >
+
+            <v-simple-table >
+              <template v-slot:default>
+                <thead>
+                  <tr class="">
+                    <th class="secondary white--text text-left">Surname</th>
+                    <th class="secondary white--text text-left">Name</th>
+
+                    <th class="success text-left">Presence days counter</th>
+                    <th class="success text-left">Presence Percentage</th>
+
+                    <th class="warning text-left">Delay Days counter</th>
+                    <th class="warning text-left">Delay Percentage</th>
+
+                    <th class="error text-left">Absence days counter</th>
+                    <th class="error text-left">Absence Percentage</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="member in members" :key="member.namePromo" :rules="parseDay(member.presence)">
+
+                      <!-- Student Name -->
+                    <td >{{ member.firstName }}</td>
+                    <td>{{ member.lastName }}</td>
+
+                    <!-- Prensence days counter -->
+                    <td>{{nbrInTime.length}}</td>
+
+                    <!-- Presence days percentage -->
+                    <td>{{persentageInTime}}%</td>
+                    
+                    <!-- Delay days counter -->
+                    <td>{{nbrLate.length}}</td>
+                    
+                    <!-- Delay days percentage -->
+                    <td>{{persentageLate}}%</td>
+
+                    <!-- Absence days counter -->
+                    <td>{{nbrAbs.length}}</td>
+
+                    <!-- Absence days percentage -->
+                    <td>{{persentageAbs}}%</td>
+
+                    
+                  </tr>
+                </tbody>
+              </template>
+            </v-simple-table>
+        </v-lazy>
+
+
+
+
+
+
+
+      </v-tabs-items>
+    </v-card>
+  </v-app>
+
+
+
+
+
+
+
+*/
 </style>
