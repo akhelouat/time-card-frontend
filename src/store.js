@@ -19,7 +19,8 @@ const mutations = {
             isAdmin: member.isAdmin,
             mail: member.mail,
             namePromo: member.namePromo,
-            isSigned: member.isSigned
+            isSigned: member.isSigned,
+            presence: member.presence
         }
     }
 };
