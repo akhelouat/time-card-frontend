@@ -27,9 +27,12 @@
 </template>
 
 <script>
-  import {
+    import {
         changePassword
     } from "../../services/api/promo";
+    import {
+        mapState
+    } from 'vuex';
     export default {
         data: () => {
             return {
@@ -43,6 +46,11 @@
                 }
             };
         },
+        computed: {
+            ...mapState({
+                loggedUserInfo: "user"
+            })
+        },
         methods: {
             checkForm: function(e) {
                 if ((this.old && this.new1 && this.new2) && (this.new1 === this.new2)) {
@@ -51,10 +59,10 @@
                 this.errors = [];
                 if ((this.new1 != this.new2) && (this.new1 && this.new2)) {
                     this.errors.push('new passwd must match.');
-                }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
-            /*    if ((this.old != this.user.password) && (this.old)) {
-                    this.errors.push('old pwd must match.');
-                }*/
+                }
+                /*    if ((this.old != this.user.password) && (this.old)) {
+                        this.errors.push('old pwd must match.');
+                    }*/
                 if (!this.old) {
                     this.errors.push('old pwd required.');
                 }
@@ -66,8 +74,8 @@
                 }
                 e.preventDefault();
             },
-               newPassword() {
-                changePassword(this.old, this.new1, this.new2)
+            newPassword() {
+                changePassword(this.loggedUserInfo._id, this.old, this.new1)
                     .then(() => {
                         this.old = ''
                         this.new1 = ''
