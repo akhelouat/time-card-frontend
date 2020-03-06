@@ -83,14 +83,14 @@ export function deleteMember(_id) {
         .then(response => response.data)
 }
 
-export function changePassword(oldPass, newPass) {
+export function changePassword(_id, oldPass, newPassword) {
     return axios.request({
-        method: 'put',
+        method: 'post',
         url: '/api/changePassword',
         data: {
             _id,
             oldPass,
-            newPass
+            newPassword
         }
 
     })
