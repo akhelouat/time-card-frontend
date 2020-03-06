@@ -123,9 +123,6 @@
         this.nbrInTime = [];
         this.nbrDay = 0;
         for (const checkDay in presence) {
-          if (presence[checkDay].date === null) {
-            break;
-          }
           if (presence[checkDay].check != 2) {
             this.nbrDay += 1
           }
