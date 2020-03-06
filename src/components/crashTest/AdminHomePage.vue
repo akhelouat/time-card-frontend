@@ -5,7 +5,7 @@
  * @ Modified time: 2020-03-05 15:25:59
  * @ Description:
  -->
-
+<!--
 <template>
   <div>
     <v-select v-model="promo" :rules="getPromotionsNames(promos)" :items="promotions" label="Promo" />
@@ -127,4 +127,4 @@
       }
     }
   };
-</script>
+</script> -->
